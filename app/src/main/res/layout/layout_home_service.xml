@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:padding="10dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="1">
+        <RelativeLayout
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/home_exhibition"
+                android:id="@+id/iv0"
+                android:layout_centerVertical="true"
+                android:layout_width="34dp"
+                android:layout_height="34dp" />
+            <TextView
+                android:text="会展综合服务"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#165ce8"
+                android:layout_toRightOf="@id/iv0"
+                android:layout_marginLeft="12dp"
+                />
+            </RelativeLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:padding="10dp"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="1">
+        <RelativeLayout
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/home_enterprise"
+                    android:id="@+id/iv1"
+                    android:layout_centerVertical="true"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp" />
+                <TextView
+                    android:text="企业综合服务"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#165ce8"
+                    android:layout_toRightOf="@id/iv1"
+                    android:layout_marginLeft="12dp"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>

@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/exhibition.iml" filepath="$PROJECT_DIR$/exhibition.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraryAdapter/libraryAdapter.iml" filepath="$PROJECT_DIR$/libraryAdapter/libraryAdapter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libraryNet/libraryNet.iml" filepath="$PROJECT_DIR$/libraryNet/libraryNet.iml" />
     </modules>
   </component>
 </project>
