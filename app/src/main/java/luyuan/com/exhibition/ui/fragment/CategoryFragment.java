@@ -59,15 +59,6 @@ public class CategoryFragment extends Fragment {
         initView();
         initListener();
         loadData();
-//        for (int i = 0; i < 4000; i++) {
-//            CategoryBean bean = new CategoryBean();
-//            bean.setName("食品");
-//            leftList.add(bean);
-//        }
-
-
-
-
 
     }
 

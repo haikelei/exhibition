@@ -1,7 +1,10 @@
 package luyuan.com.exhibition.bean;
 
+import android.os.Parcelable;
+
 import com.zhouyou.http.model.ApiResult;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +14,7 @@ import java.util.List;
  */
 
 
-public class CategoryBean  extends ApiResult{
+public class CategoryBean  extends ApiResult implements Serializable{
 
     /**
      * trade_id : 4

@@ -1,5 +1,6 @@
 package luyuan.com.exhibition;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import luyuan.com.exhibition.ui.activity.BaseActivity;
+import luyuan.com.exhibition.ui.activity.CompanyListActivity;
 import luyuan.com.exhibition.ui.widget.BottomNavigationView;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.ui.widget.HomeServiceView;

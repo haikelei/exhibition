@@ -1,6 +1,8 @@
 package luyuan.com.exhibition.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CategoryBean;
+import luyuan.com.exhibition.ui.activity.CompanyListActivity;
 
 /**
  * @author: lujialei
@@ -46,12 +49,21 @@ public class MyGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view  = layoutInflater.inflate(R.layout.layout_category_grid_item,null);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final View view  = layoutInflater.inflate(R.layout.layout_category_grid_item,null);
         ImageView imageView = view.findViewById(R.id.iv);
         TextView textView = view.findViewById(R.id.tv);
         textView.setText(list.get(position).getName());
-
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), CompanyListActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(CompanyListActivity.CATEGORY_BEAN,list.get(position));
+                intent.putExtras(bundle);
+                view.getContext().startActivity(intent);
+            }
+        });
 
         return view;
     }
