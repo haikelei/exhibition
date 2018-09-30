@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.ui.fragment.CategoryFragment;
-import luyuan.com.exhibition.ui.fragment.ChatFragment;
+import luyuan.com.exhibition.ui.fragment.ChatListFragment;
 import luyuan.com.exhibition.ui.fragment.HomeFragment;
 import luyuan.com.exhibition.ui.fragment.MineFragment;
 
@@ -66,7 +66,7 @@ public class BottomNavigationView extends RelativeLayout {
         fragmentList = new ArrayList();
         fragmentList.add(new HomeFragment());
         fragmentList.add(new CategoryFragment());
-        fragmentList.add(new ChatFragment());
+        fragmentList.add(new ChatListFragment());
         fragmentList.add(new MineFragment());
         supportFragmentManager.beginTransaction()
                 .add(R.id.container,fragmentList.get(0),"home")

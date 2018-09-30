@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".ui.activity.CompanyListActivity"></activity>
         <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
-
+        <activity android:name="org.kymjs.chat.ChatActivity"></activity>
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

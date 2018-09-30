@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+import org.kymjs.chat.ChatActivity;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -28,7 +30,7 @@ import luyuan.com.exhibition.ui.adapter.ChatListAdaper;
  */
 
 
-public class ChatFragment extends Fragment {
+public class ChatListFragment extends Fragment {
 
     Unbinder unbinder;
     @BindView(R.id.rv)
@@ -60,7 +62,7 @@ public class ChatFragment extends Fragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                startActivity(new Intent(getActivity(), ].class));
+                startActivity(new Intent(getActivity(), ChatActivity.class));
             }
         });
     }
