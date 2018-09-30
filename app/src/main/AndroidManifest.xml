@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.CompanyListActivity"></activity>
+        <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
     </application>
 
 </manifest>

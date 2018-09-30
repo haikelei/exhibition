@@ -2,6 +2,7 @@ package luyuan.com.exhibition.ui.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.location.Address;
@@ -19,6 +20,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
@@ -139,21 +141,23 @@ public class CompanyListActivity extends BaseActivity {
                 .execute(new SimpleCallBack<List<CompanyListBean>>() {
                     @Override
                     public void onError(ApiException e) {
-                        ArrayList cityListBeans = new ArrayList();
-                        for (int i = 0; i < 50; i++) {
-                            cityListBeans.add(new CompanyListBean());
-                        }
-                        mContentAdapter = new CompanyListAdapter(cityListBeans);
-                        rvContent.setAdapter(mContentAdapter);
+
                     }
 
                     @Override
                     public void onSuccess(List<CompanyListBean> cityListBeans) {
+
                         for (int i = 0; i < 50; i++) {
                             cityListBeans.add(new CompanyListBean());
                         }
                         mContentAdapter = new CompanyListAdapter(cityListBeans);
                         rvContent.setAdapter(mContentAdapter);
+                        mContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                                startActivity(new Intent(view.getContext(),CompanyDetailActivity.class));
+                            }
+                        });
                     }
                 });
 

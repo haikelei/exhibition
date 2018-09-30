@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import luyuan.com.exhibition.R;
+import luyuan.com.exhibition.ui.interfaces.GlideImageLoader;
 
 /**
  * @author: lujialei
@@ -52,14 +53,6 @@ public class HomeBannerView extends FrameLayout {
         ButterKnife.bind(this);
         ArrayList list = new ArrayList();
         list.add("http://cn.bing.com/az/hprichbg/rb/Dongdaemun_ZH-CN10736487148_1920x1080.jpg");
-        banner.setImages(list).setImageLoader(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, Object path, ImageView imageView) {
-                Glide.with(context)
-                        .load(path)
-                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                        .into(imageView);
-            }
-        }).start();
+        banner.setImages(list).setImageLoader(new GlideImageLoader()).start();
     }
 }
