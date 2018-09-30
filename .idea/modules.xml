@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/exhibition.iml" filepath="$PROJECT_DIR$/exhibition.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hmspush/hmspush.iml" filepath="$PROJECT_DIR$/hmspush/hmspush.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraryAdapter/libraryAdapter.iml" filepath="$PROJECT_DIR$/libraryAdapter/libraryAdapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/libraryNet/libraryNet.iml" filepath="$PROJECT_DIR$/libraryNet/libraryNet.iml" />
     </modules>
