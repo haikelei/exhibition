@@ -10,6 +10,7 @@ import com.zhouyou.http.request.PostRequest;
  */
 
 public class HttpManager {
+
     /**
      * get请求
      */
@@ -23,4 +24,14 @@ public class HttpManager {
     public static PostRequest post(String url) {
         return new CustomPostRequest(url);
     }
+
+
+    /**
+     * 获取城市列表
+     */
+    public static final String GET_CITY_LIST = "Overall/getOpenRegions";
+    /**
+     * 获取企业列表
+     */
+    public static final String GET_COMPANY_LIST = "Company/getCompanyList";
 }

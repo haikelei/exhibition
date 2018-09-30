@@ -13,15 +13,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -30,7 +32,10 @@ import butterknife.OnClick;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CategoryBean;
 import luyuan.com.exhibition.bean.CityBean;
+import luyuan.com.exhibition.bean.CompanyListBean;
+import luyuan.com.exhibition.bean.param.GetCompanyParam;
 import luyuan.com.exhibition.net.HttpManager;
+import luyuan.com.exhibition.ui.adapter.CompanyListAdapter;
 import luyuan.com.exhibition.ui.widget.DownLeftRecyclerView;
 import luyuan.com.exhibition.ui.widget.DownRightRecyclerView;
 import luyuan.com.exhibition.ui.widget.DownSelectView;
@@ -53,11 +58,14 @@ public class CompanyListActivity extends BaseActivity {
     DownSelectView downViewRight;
     @BindView(R.id.contaier)
     RelativeLayout contaier;
+    @BindView(R.id.rv_content)
+    RecyclerView rvContent;
     private DownLeftRecyclerView left;
     private DownRightRecyclerView right;
     public final static String CATEGORY_BEAN = "category";
     private CategoryBean categoryBean;
     private List<CityBean> cityList;
+    private CompanyListAdapter mContentAdapter;
 
     private Handler handler = new Handler() {
         @Override
@@ -67,12 +75,12 @@ public class CompanyListActivity extends BaseActivity {
             Geocoder ge = new Geocoder(getApplicationContext());
             try {
                 addList = ge.getFromLocation(data[0], data[1], 1);
-                if (addList!=null&&addList.get(0)!=null){
+                if (addList != null && addList.get(0) != null) {
                     String mCity = addList.get(0).getLocality();
-                    if (mCity!=null&&cityList!=null){
+                    if (mCity != null && cityList != null) {
                         for (int i = 0; i < cityList.size(); i++) {
                             String city = cityList.get(i).getRegion_name();
-                            if (mCity.contains(city)){
+                            if (mCity.contains(city)) {
                                 downViewLeft.setText(city);
                             }
                         }
@@ -102,10 +110,12 @@ public class CompanyListActivity extends BaseActivity {
         if (categoryBean != null) {
             downViewRight.setText(categoryBean.getName());
         }
+        rvContent.setLayoutManager(new GridLayoutManager(this,4));
+
     }
 
     private void loadData() {
-        HttpManager.post("Overall/getOpenRegions")
+        HttpManager.post(HttpManager.GET_CITY_LIST)
                 .execute(new SimpleCallBack<List<CityBean>>() {
                     @Override
                     public void onError(ApiException e) {
@@ -119,6 +129,35 @@ public class CompanyListActivity extends BaseActivity {
                         getLocation();
                     }
                 });
+
+        GetCompanyParam param = new GetCompanyParam();
+        if (categoryBean != null) {
+            param.trade_id = categoryBean.getTrade_id();
+        }
+        HttpManager.post(HttpManager.GET_COMPANY_LIST)
+                .customParams(param)
+                .execute(new SimpleCallBack<List<CompanyListBean>>() {
+                    @Override
+                    public void onError(ApiException e) {
+                        ArrayList cityListBeans = new ArrayList();
+                        for (int i = 0; i < 50; i++) {
+                            cityListBeans.add(new CompanyListBean());
+                        }
+                        mContentAdapter = new CompanyListAdapter(cityListBeans);
+                        rvContent.setAdapter(mContentAdapter);
+                    }
+
+                    @Override
+                    public void onSuccess(List<CompanyListBean> cityListBeans) {
+                        for (int i = 0; i < 50; i++) {
+                            cityListBeans.add(new CompanyListBean());
+                        }
+                        mContentAdapter = new CompanyListAdapter(cityListBeans);
+                        rvContent.setAdapter(mContentAdapter);
+                    }
+                });
+
+
     }
 
     private PermissionHelper mPermissionHelper;
@@ -150,7 +189,7 @@ public class CompanyListActivity extends BaseActivity {
         });
         mPermissionHelper.requestPermissions();
 
-        }
+    }
 
     private void getRealLocation() {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -176,40 +215,40 @@ public class CompanyListActivity extends BaseActivity {
     }
 
     @OnClick({R.id.down_view_left, R.id.down_view_right})
-        public void onViewClicked(View view) {
-            switch (view.getId()) {
-                case R.id.down_view_left:
-                    if (left == null) {
-                        left = new DownLeftRecyclerView(this);
-                        if (cityList != null) {
-                            left.setData(cityList);
-                        }
-                        left.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
-                        Rect rect = new Rect();
-                        downViewLeft.getGlobalVisibleRect(rect);
-                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(rect.width(), 800);
-                        layoutParams.leftMargin = rect.left;
-                        layoutParams.topMargin = rect.bottom - ScreenUtil.getStateBarHeight(this);
-                        contaier.addView(left, layoutParams);
-                    } else {
-                        left.setVisibility(left.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.down_view_left:
+                if (left == null) {
+                    left = new DownLeftRecyclerView(this);
+                    if (cityList != null) {
+                        left.setData(cityList);
                     }
-                    break;
-                case R.id.down_view_right:
-                    if (right == null) {
-                        right = new DownRightRecyclerView(this);
-                        right.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
-                        Rect rect2 = new Rect();
-                        downViewRight.getGlobalVisibleRect(rect2);
-                        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(rect2.width(), 800);
-                        layoutParams2.leftMargin = rect2.left;
-                        layoutParams2.topMargin = rect2.bottom - ScreenUtil.getStateBarHeight(this);
-                        contaier.addView(right, layoutParams2);
-                    } else {
-                        right.setVisibility(right.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-                    }
+                    left.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
+                    Rect rect = new Rect();
+                    downViewLeft.getGlobalVisibleRect(rect);
+                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(rect.width(), 800);
+                    layoutParams.leftMargin = rect.left;
+                    layoutParams.topMargin = rect.bottom - ScreenUtil.getStateBarHeight(this);
+                    contaier.addView(left, layoutParams);
+                } else {
+                    left.setVisibility(left.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                }
+                break;
+            case R.id.down_view_right:
+                if (right == null) {
+                    right = new DownRightRecyclerView(this);
+                    right.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
+                    Rect rect2 = new Rect();
+                    downViewRight.getGlobalVisibleRect(rect2);
+                    RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(rect2.width(), 800);
+                    layoutParams2.leftMargin = rect2.left;
+                    layoutParams2.topMargin = rect2.bottom - ScreenUtil.getStateBarHeight(this);
+                    contaier.addView(right, layoutParams2);
+                } else {
+                    right.setVisibility(right.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+                }
 
-                    break;
-            }
+                break;
         }
     }
+}

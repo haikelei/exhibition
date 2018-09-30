@@ -33,6 +33,7 @@ import com.zhouyou.http.interceptor.NoCacheInterceptor;
 import com.zhouyou.http.model.HttpHeaders;
 import com.zhouyou.http.model.HttpParams;
 import com.zhouyou.http.utils.HttpLog;
+import com.zhouyou.http.utils.ReflectUtil;
 import com.zhouyou.http.utils.RxUtil;
 import com.zhouyou.http.utils.Utils;
 
@@ -315,6 +316,19 @@ public abstract class BaseRequest<R extends BaseRequest> {
      */
     public R params(HttpParams params) {
         this.params.put(params);
+        return (R) this;
+    }
+
+
+    public R customParams(Object object){
+        String[] arr = ReflectUtil.getFiledName(object);
+        for (int i = 0; i < arr.length; i++) {
+            String key = arr[i];
+            Object value = ReflectUtil.getFieldValueByName(key,object);
+            if (value!=null){
+                this.params.put(key,String.valueOf(value));
+            }
+        }
         return (R) this;
     }
 

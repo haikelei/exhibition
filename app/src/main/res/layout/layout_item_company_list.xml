@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv"
+        android:background="#880000"
+        android:layout_width="75dp"
+        android:layout_height="75dp" />
+
+    <TextView
+        android:layout_marginTop="11dp"
+        android:textSize="13sp"
+        android:textColor="#666666"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv"
+        android:text="某某企业"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
