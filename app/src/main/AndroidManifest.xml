@@ -22,6 +22,15 @@
         <activity android:name=".ui.activity.CompanyListActivity"></activity>
         <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
         <activity android:name="org.kymjs.chat.ChatActivity"></activity>
+        <activity android:name=".ui.activity.MyPageActivity"></activity>
+        <activity android:name=".ui.activity.ApplyExhibitionActivity"></activity>
+        <activity android:name=".ui.activity.AddProductActivity"></activity>
+        <activity android:name=".ui.activity.MyInfoActivity"></activity>
+        <activity android:name=".ui.activity.ManageProductActivity"></activity>
+        <activity android:name=".ui.activity.SettingActivity"></activity>
+        <activity android:name=".ui.activity.LoginPasswordActivity"></activity>
+        <activity android:name=".ui.activity.RegistActivity"></activity>
+        <activity android:name=".ui.activity.LoginYanZhengMaActivity"></activity>
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

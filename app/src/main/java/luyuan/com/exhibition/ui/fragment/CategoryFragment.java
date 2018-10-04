@@ -82,7 +82,9 @@ public class CategoryFragment extends Fragment {
 
     private void generateRightList() {
         for (int i = 0; i < leftList.size(); i++) {
-            rightList.addAll(leftList.get(i).getChildren());
+            if (leftList.get(i).getChildren()!=null){
+                rightList.addAll(leftList.get(i).getChildren());
+            }
         }
     }
 
