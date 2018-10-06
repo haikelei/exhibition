@@ -1,1 +1,1 @@
-include ':app', ':libraryAdapter', ':libraryNet', ':hmspush', ':easeui', ':chat'
+include ':app', ':libraryAdapter', ':libraryNet', ':easeui'

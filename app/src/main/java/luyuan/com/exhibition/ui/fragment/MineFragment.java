@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,18 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import luyuan.com.exhibition.event.EventModifyAvatar;
+import luyuan.com.exhibition.event.EventModifyNickname;
 import luyuan.com.exhibition.R;
+import luyuan.com.exhibition.bean.LoginBean;
 import luyuan.com.exhibition.ui.activity.ApplyExhibitionActivity;
 import luyuan.com.exhibition.ui.activity.LoginPasswordActivity;
 import luyuan.com.exhibition.ui.activity.ManageProductActivity;
@@ -52,6 +60,8 @@ public class MineFragment extends Fragment {
     RelativeLayout rlSettings;
     @BindView(R.id.tv_name)
     TextView tvName;
+    @BindView(R.id.tv_account)
+    TextView tvAccount;
 
 
     @Nullable
@@ -59,6 +69,7 @@ public class MineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
         return view;
     }
 
@@ -67,14 +78,23 @@ public class MineFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         if (!SettingManager.getInstance().isLogin()) {
             tvName.setText("未登录");
+        } else {
+            if (TextUtils.isEmpty(SettingManager.getInstance().getNickname())){
+                tvName.setText("已登录");
+            }else {
+                tvName.setText(SettingManager.getInstance().getNickname());
+            }
+        }
+        if (TextUtils.isEmpty(SettingManager.getInstance().getAccount())){
+            tvAccount.setText("");
         }else {
-            tvName.setText(SettingManager.getInstance().getNickname());
+            tvAccount.setText(SettingManager.getInstance().getAccount());
         }
         if (!SettingManager.getInstance().isLogin()) {
             ivAvatar.setImageResource(R.mipmap.home_exhibition);
-        }else {
+        } else {
             Glide.with(getActivity())
-                    .load(Const.IMG_PRE+SettingManager.getInstance().getAvatar())
+                    .load(Const.IMG_PRE + SettingManager.getInstance().getAvatar())
                     .into(ivAvatar);
         }
     }
@@ -89,9 +109,9 @@ public class MineFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_avatar://头像
-                if (SettingManager.getInstance().isLogin()){
+                if (SettingManager.getInstance().isLogin()) {
 
-                }else {
+                } else {
                     startActivity(new Intent(getContext(), LoginPasswordActivity.class));
                 }
                 break;
@@ -111,5 +131,33 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getContext(), SettingActivity.class));
                 break;
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLogin(LoginBean loginBean) {
+        if (TextUtils.isEmpty(loginBean.getProfile().getNickname())) {
+            tvName.setText("已登录");
+        } else {
+            tvName.setText(loginBean.getProfile().getNickname());
+        }
+
+        if (TextUtils.isEmpty(loginBean.getTelno())){
+            tvAccount.setText("");
+        }else {
+            tvAccount.setText(loginBean.getTelno());
+        }
+
+    }
+
+    @Subscribe
+    public void onNicknameEdited(EventModifyNickname eventModifyNickname){
+        tvName.setText(eventModifyNickname.nickname);
+    }
+
+    @Subscribe
+    public void onAvatarEdited(EventModifyAvatar event){
+        Glide.with(getContext())
+                .load(Const.IMG_PRE+event.avatar)
+                .into(ivAvatar);
     }
 }

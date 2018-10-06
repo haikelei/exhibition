@@ -101,6 +101,16 @@ public class CategoryFragment extends Fragment {
                 }
                 mLeftAdapter.notifyDataSetChanged();
 
+                int leftId = leftList.get(position).getTrade_id();
+                for (int i = 0; i < rightList.size(); i++) {
+                    int rightId = rightList.get(i).getParent_id();
+                    if (leftId==rightId){
+                        rvRight.smoothScrollToPosition(i);
+                        return;
+                    }
+                }
+
+
             }
         });
     }

@@ -24,6 +24,6 @@ public class CompanyListAdapter extends BaseQuickAdapter<CompanyListBean,BaseVie
 
     @Override
     protected void convert(BaseViewHolder helper, CompanyListBean item) {
-
+        helper.setText(R.id.tv,item.getNickname());
     }
 }

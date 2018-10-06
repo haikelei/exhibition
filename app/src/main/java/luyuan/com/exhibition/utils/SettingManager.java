@@ -35,7 +35,7 @@ public class SettingManager {
     }
 
     public boolean isLogin(){
-        return !TextUtils.isEmpty((String) helper.getSharedPreference("nick_name",""));
+        return !TextUtils.isEmpty((String) helper.getSharedPreference("token",""));
     }
 
     public void setAvatar(String nickname){
@@ -44,5 +44,21 @@ public class SettingManager {
 
     public String getAvatar(){
         return (String) helper.getSharedPreference("avatar","");
+    }
+
+    public void setToken(String token){
+        helper.put("token",token);
+    }
+
+    public String getToken(){
+        return (String) helper.getSharedPreference("token","");
+    }
+
+    public void setAccount(String telno) {
+        helper.put("account",telno);
+    }
+
+    public String getAccount(){
+        return (String) helper.getSharedPreference("account","");
     }
 }

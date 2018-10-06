@@ -70,10 +70,17 @@ public class DefaultTopBar extends RelativeLayout {
         tvChat.setVisibility(b ? VISIBLE : GONE);
     }
 
-    @OnClick(R.id.iv_left)
-    public void onViewClicked() {
-        if (activity != null) {
-            activity.onBackPressed();
+    @OnClick({R.id.iv_left,R.id.tv_chat})
+    public void onViewClicked(View v) {
+        if (v.getId()==R.id.iv_left){
+            if (activity != null) {
+                activity.onBackPressed();
+            }
+        }else if (v.getId()==R.id.tv_chat){
+            if (mOnTopBarClickListener!=null){
+                mOnTopBarClickListener.onChatClick(v);
+            }
         }
+
     }
 }

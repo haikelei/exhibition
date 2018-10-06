@@ -9,7 +9,10 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.WindowManager;
+
+import com.hyphenate.easeui.BuildConfig;
 
 import java.io.File;
 
@@ -20,6 +23,7 @@ import java.io.File;
 public class EaseCompat {
 
     public static Uri getUriForFile(Context context, File file) {
+        Log.e("lujialei",context.getPackageName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return FileProvider.getUriForFile(context, context.getPackageName() + ".fileProvider", file);
         } else {

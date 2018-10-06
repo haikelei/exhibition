@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#f6f6f6"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.youth.banner.Banner
@@ -8,5 +8,55 @@
         android:layout_height="150dp"
         android:id="@+id/banner"
         ></com.youth.banner.Banner>
-
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_intro"
+        android:layout_below="@id/banner"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/tv_company_name"
+            android:layout_gravity="center_horizontal"
+            android:text="ddddd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:paddingBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_weight="4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_centerInParent="true"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/tv_des"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/rv"
+       android:layout_below="@id/ll_intro"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    <RelativeLayout
+        android:background="#650000"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"></RelativeLayout>
+</RelativeLayout>

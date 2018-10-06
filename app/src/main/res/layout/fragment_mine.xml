@@ -10,6 +10,7 @@
         android:layout_height="90dp">
 
         <ImageView
+            android:src="@mipmap/home_exhibition"
             android:id="@+id/iv_avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -64,11 +65,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:background="#660000"
+            android:src="@mipmap/mine_apply"
             android:id="@+id/iv_icon1"
             android:layout_marginLeft="15dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -95,11 +96,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:background="#660000"
+            android:src="@mipmap/mine_document"
             android:id="@+id/iv_icon2"
             android:layout_marginLeft="15dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -126,11 +127,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:background="#660000"
+            android:src="@mipmap/mine_home"
             android:id="@+id/iv_icon3"
             android:layout_marginLeft="15dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -157,11 +158,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:background="#660000"
+            android:src="@mipmap/mine_product"
             android:id="@+id/iv_icon4"
             android:layout_marginLeft="15dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             />
         <TextView
@@ -189,11 +190,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:background="#660000"
+            android:src="@mipmap/mine_setting"
             android:id="@+id/iv_icon5"
             android:layout_marginLeft="15dp"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
             />
         <TextView

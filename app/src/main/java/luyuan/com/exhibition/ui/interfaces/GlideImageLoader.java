@@ -8,6 +8,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.youth.banner.loader.ImageLoader;
 
+import luyuan.com.exhibition.utils.Const;
+
 /**
  * @author: lujialei
  * @date: 2018/9/30
@@ -20,7 +22,7 @@ public class GlideImageLoader extends ImageLoader {
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
         Glide.with(context)
-                .load(path)
+                .load(Const.IMG_PRE+path)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
                 .into(imageView);
     }

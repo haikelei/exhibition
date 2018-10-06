@@ -3,10 +3,15 @@ package luyuan.com.exhibition;
 import android.app.Application;
 import android.content.Context;
 
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.converter.SerializableDiskConverter;
 import com.zhouyou.http.model.HttpHeaders;
 import com.zhouyou.http.model.HttpParams;
+
+import luyuan.com.exhibition.net.interceptor.TokenInterceptor;
 
 /**
  * @author: lujialei
@@ -22,6 +27,14 @@ public class MyApplication extends Application {
         super.onCreate();
         app = this;
         initNet();
+        initHX();
+    }
+
+    private void initHX() {
+        EMOptions options = new EMOptions();
+
+//        EMClient.getInstance().init(this,options);
+        EaseUI.getInstance().init(this, options);
     }
 
     private void initNet() {
@@ -52,8 +65,8 @@ public class MyApplication extends Application {
                 .setCertificates()//信任所有证书
                 //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
                 .addCommonHeaders(headers)//设置全局公共头
-                .addCommonParams(params);//设置全局公共参数
-        //.addInterceptor(new HeTInterceptor());//处理自己业务的拦截器
+                .addCommonParams(params)//设置全局公共参数
+                .addInterceptor(new TokenInterceptor());//处理自己业务的拦截器
     }
 
     /**

@@ -3,15 +3,28 @@ package luyuan.com.exhibition.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMChatManager;
+import com.hyphenate.chat.EMClient;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import luyuan.com.exhibition.R;
+import luyuan.com.exhibition.bean.LoginBean;
+import luyuan.com.exhibition.net.HttpManager;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
+import luyuan.com.exhibition.utils.SettingManager;
 
 /**
  * @author: lujialei
@@ -52,8 +65,56 @@ public class LoginPasswordActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_login://登录按钮
-
+                String phone = etPhone.getText().toString();
+                String password = etPassword.getText().toString();
+                if (TextUtils.isEmpty(phone)){
+                    Toast.makeText(this,"请填写手机号",Toast.LENGTH_SHORT).show();
+                } else if (TextUtils.isEmpty(password)){
+                    Toast.makeText(this,"请填写密码",Toast.LENGTH_SHORT).show();
+                } else {
+                    login(phone,password);
+                }
                 break;
         }
+    }
+
+    private void login(String phone,String password) {
+        HttpManager.post(HttpManager.GET_LOGIN)
+                .params("telno",phone)
+                .params("password",password)
+                .execute(new SimpleCallBack<LoginBean>() {
+                    @Override
+                    public void onError(ApiException e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(LoginBean loginBean) {
+                        SettingManager.getInstance().setAvatar(loginBean.getProfile().getHeadimgurl());
+                        SettingManager.getInstance().setNickname(loginBean.getProfile().getNickname());
+                        SettingManager.getInstance().setToken(loginBean.getToken());
+                        SettingManager.getInstance().setAccount(loginBean.getTelno());
+                        EventBus.getDefault().post(loginBean);
+                        LoginBean.AppChatBean chatBean = loginBean.getApp_chat();
+
+                        EMClient.getInstance().login(chatBean.getHx_username(), chatBean.getHx_password(), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+
+                            }
+                        });
+                        finish();
+                    }
+                });
     }
 }

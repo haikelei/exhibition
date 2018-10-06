@@ -11,12 +11,12 @@
         android:layout_height="75dp" />
 
     <TextView
+        android:id="@+id/tv"
         android:layout_marginTop="11dp"
         android:textSize="13sp"
         android:textColor="#666666"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/iv"
-        android:text="某某企业"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

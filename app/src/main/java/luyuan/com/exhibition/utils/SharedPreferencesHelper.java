@@ -28,6 +28,9 @@ public class SharedPreferencesHelper {
      * 存储
      */
     public void put(String key, Object object) {
+        if (object==null){
+            return;
+        }
         if (object instanceof String) {
             editor.putString(key, (String) object);
         } else if (object instanceof Integer) {

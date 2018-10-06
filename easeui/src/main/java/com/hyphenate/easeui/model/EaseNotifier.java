@@ -242,7 +242,7 @@ public class EaseNotifier {
         Intent i = appContext.getPackageManager().getLaunchIntentForPackage(packageName);
         PendingIntent pendingIntent = PendingIntent.getActivity(appContext, NOTIFY_ID, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        return new NotificationCompat.Builder(appContext)
+        return new NotificationCompat.Builder(appContext, CHANNEL_ID)
                 .setSmallIcon(appContext.getApplicationInfo().icon)
                 .setContentTitle(title)
                 .setTicker(content)

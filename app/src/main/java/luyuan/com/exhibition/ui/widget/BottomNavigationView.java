@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,22 @@ public class BottomNavigationView extends RelativeLayout {
     ImageView iv2;
     @BindView(R.id.iv3)
     ImageView iv3;
+    @BindView(R.id.tv0)
+    TextView tv0;
+    @BindView(R.id.rl0)
+    RelativeLayout rl0;
+    @BindView(R.id.tv1)
+    TextView tv1;
+    @BindView(R.id.rl1)
+    RelativeLayout rl1;
+    @BindView(R.id.tv2)
+    TextView tv2;
+    @BindView(R.id.rl2)
+    RelativeLayout rl2;
+    @BindView(R.id.tv3)
+    TextView tv3;
+    @BindView(R.id.rl3)
+    RelativeLayout rl3;
 
     public BottomNavigationView(Context context) {
         this(context, null);
@@ -57,10 +74,12 @@ public class BottomNavigationView extends RelativeLayout {
         iv1.setSelected(false);
         iv2.setSelected(false);
         iv3.setSelected(false);
+        tv0.setTextColor(getResources().getColor(R.color.c_165ce8));
     }
 
     private ArrayList<Fragment> fragmentList;
     private FragmentManager supportFragmentManager;
+
     public void initFragment(FragmentManager supportFragmentManager) {
         this.supportFragmentManager = supportFragmentManager;
         fragmentList = new ArrayList();
@@ -69,64 +88,82 @@ public class BottomNavigationView extends RelativeLayout {
         fragmentList.add(new ChatListFragment());
         fragmentList.add(new MineFragment());
         supportFragmentManager.beginTransaction()
-                .add(R.id.container,fragmentList.get(0),"home")
-                .add(R.id.container,fragmentList.get(1),"category")
-                .add(R.id.container,fragmentList.get(2),"chat")
-                .add(R.id.container,fragmentList.get(3),"mine")
+                .add(R.id.container, fragmentList.get(0), "home")
+                .add(R.id.container, fragmentList.get(1), "category")
+                .add(R.id.container, fragmentList.get(2), "chat")
+                .add(R.id.container, fragmentList.get(3), "mine")
                 .hide(fragmentList.get(1))
                 .hide(fragmentList.get(2))
                 .hide(fragmentList.get(3))
                 .commitAllowingStateLoss();
     }
 
-    public interface Listener{
+    public interface Listener {
         void onClick(int index);
     }
+
     private Listener listener;
-    public void setListener(Listener listener){
+
+    public void setListener(Listener listener) {
         this.listener = listener;
     }
 
-    @OnClick({R.id.iv0, R.id.iv1, R.id.iv2, R.id.iv3})
+    @OnClick({R.id.rl0, R.id.rl1, R.id.rl2, R.id.rl3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv0:
+            case R.id.rl0:
                 iv0.setSelected(true);
                 iv1.setSelected(false);
                 iv2.setSelected(false);
                 iv3.setSelected(false);
+                tv0.setTextColor(getResources().getColor(R.color.c_165ce8));
+                tv1.setTextColor(getResources().getColor(R.color.c_999999));
+                tv2.setTextColor(getResources().getColor(R.color.c_999999));
+                tv3.setTextColor(getResources().getColor(R.color.c_999999));
                 changeTab(0);
-                if (listener!= null){
+                if (listener != null) {
                     listener.onClick(0);
                 }
                 break;
-            case R.id.iv1:
+            case R.id.rl1:
                 iv0.setSelected(false);
                 iv1.setSelected(true);
                 iv2.setSelected(false);
                 iv3.setSelected(false);
+                tv0.setTextColor(getResources().getColor(R.color.c_999999));
+                tv1.setTextColor(getResources().getColor(R.color.c_165ce8));
+                tv2.setTextColor(getResources().getColor(R.color.c_999999));
+                tv3.setTextColor(getResources().getColor(R.color.c_999999));
                 changeTab(1);
-                if (listener!= null){
+                if (listener != null) {
                     listener.onClick(1);
                 }
                 break;
-            case R.id.iv2:
+            case R.id.rl2:
                 iv0.setSelected(false);
                 iv1.setSelected(false);
                 iv2.setSelected(true);
                 iv3.setSelected(false);
+                tv0.setTextColor(getResources().getColor(R.color.c_999999));
+                tv1.setTextColor(getResources().getColor(R.color.c_999999));
+                tv2.setTextColor(getResources().getColor(R.color.c_165ce8));
+                tv3.setTextColor(getResources().getColor(R.color.c_999999));
                 changeTab(2);
-                if (listener!= null){
+                if (listener != null) {
                     listener.onClick(2);
                 }
                 break;
-            case R.id.iv3:
+            case R.id.rl3:
                 iv0.setSelected(false);
                 iv1.setSelected(false);
                 iv2.setSelected(false);
                 iv3.setSelected(true);
+                tv0.setTextColor(getResources().getColor(R.color.c_999999));
+                tv1.setTextColor(getResources().getColor(R.color.c_999999));
+                tv2.setTextColor(getResources().getColor(R.color.c_999999));
+                tv3.setTextColor(getResources().getColor(R.color.c_165ce8));
                 changeTab(3);
-                if (listener!= null){
+                if (listener != null) {
                     listener.onClick(3);
                 }
                 break;
@@ -134,28 +171,28 @@ public class BottomNavigationView extends RelativeLayout {
     }
 
     private void changeTab(int index) {
-        if (index==0){
+        if (index == 0) {
             supportFragmentManager.beginTransaction()
                     .show(fragmentList.get(0))
                     .hide(fragmentList.get(1))
                     .hide(fragmentList.get(2))
                     .hide(fragmentList.get(3))
                     .commitAllowingStateLoss();
-        } else if (index==1){
+        } else if (index == 1) {
             supportFragmentManager.beginTransaction()
                     .hide(fragmentList.get(0))
                     .show(fragmentList.get(1))
                     .hide(fragmentList.get(2))
                     .hide(fragmentList.get(3))
                     .commitAllowingStateLoss();
-        } else if (index==2){
+        } else if (index == 2) {
             supportFragmentManager.beginTransaction()
                     .hide(fragmentList.get(0))
                     .hide(fragmentList.get(1))
                     .show(fragmentList.get(2))
                     .hide(fragmentList.get(3))
                     .commitAllowingStateLoss();
-        } else if (index==3){
+        } else if (index == 3) {
             supportFragmentManager.beginTransaction()
                     .hide(fragmentList.get(0))
                     .hide(fragmentList.get(1))

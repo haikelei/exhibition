@@ -12,8 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hyphenate.chat.EMConversation;
+import com.hyphenate.easeui.ui.EaseConversationListFragment;
 
-import org.kymjs.chat.ChatActivity;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import luyuan.com.exhibition.R;
+import luyuan.com.exhibition.ui.activity.ChatActivity;
 import luyuan.com.exhibition.ui.adapter.ChatListAdaper;
+
+import static luyuan.com.exhibition.ui.activity.ChatActivity.CHAT_PASSWORD;
+import static luyuan.com.exhibition.ui.activity.ChatActivity.CHAT_STATUS;
+import static luyuan.com.exhibition.ui.activity.ChatActivity.CHAT_USER_NAME;
 
 /**
  * @author: lujialei
@@ -33,9 +39,7 @@ import luyuan.com.exhibition.ui.adapter.ChatListAdaper;
 public class ChatListFragment extends Fragment {
 
     Unbinder unbinder;
-    @BindView(R.id.rv)
-    RecyclerView rv;
-    ChatListAdaper mAdapter;
+
 
     @Nullable
     @Override
@@ -52,19 +56,17 @@ public class ChatListFragment extends Fragment {
     }
 
     private void initView() {
-        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ArrayList list = new ArrayList();
-        for (int i = 0; i < 10; i++) {
-            list.add("");
-        }
-        mAdapter = new ChatListAdaper(list);
-        rv.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        EaseConversationListFragment conversationListFragment = new EaseConversationListFragment();
+        conversationListFragment.setConversationListItemClickListener(new EaseConversationListFragment.EaseConversationListItemClickListener() {
             @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getActivity(), ChatActivity.class));
+            public void onListItemClicked(EMConversation conversation) {
+                String username = conversation.getLastMessage().getUserName();
+                Intent intent = new Intent(getContext(), ChatActivity.class);
+                intent.putExtra(CHAT_USER_NAME,username);
+                startActivity(intent);
             }
         });
+        getChildFragmentManager().beginTransaction().add(R.id.container, conversationListFragment).commit();
     }
 
     @Override

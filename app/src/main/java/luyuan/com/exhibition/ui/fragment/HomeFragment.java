@@ -1,5 +1,6 @@
 package luyuan.com.exhibition.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
@@ -22,6 +24,7 @@ import butterknife.Unbinder;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CategoryBean;
 import luyuan.com.exhibition.net.HttpManager;
+import luyuan.com.exhibition.ui.activity.CompanyListActivity;
 import luyuan.com.exhibition.ui.adapter.HomeAdapter;
 import luyuan.com.exhibition.ui.widget.HomeBannerView;
 import luyuan.com.exhibition.ui.widget.HomeServiceView;
@@ -73,6 +76,9 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+
+
+
     }
 
     private void initView() {
@@ -81,6 +87,12 @@ public class HomeFragment extends Fragment {
         mAdapter.addHeaderView(new HomeBannerView(getContext()));
         mAdapter.addHeaderView(new HomeServiceView(getContext()));
         rv.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                startActivity(new Intent(getContext(), CompanyListActivity.class));
+            }
+        });
     }
 
     @Override

@@ -44,6 +44,8 @@ import luyuan.com.exhibition.utils.PermissionHelper;
 import luyuan.com.exhibition.utils.PermissionInterface;
 import luyuan.com.exhibition.utils.ScreenUtil;
 
+import static luyuan.com.exhibition.ui.activity.CompanyDetailActivity.BOOTH_ID;
+
 /**
  * @author: lujialei
  * @date: 2018/9/29
@@ -144,17 +146,15 @@ public class CompanyListActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onSuccess(List<CompanyListBean> cityListBeans) {
-
-                        for (int i = 0; i < 50; i++) {
-                            cityListBeans.add(new CompanyListBean());
-                        }
+                    public void onSuccess(final List<CompanyListBean> cityListBeans) {
                         mContentAdapter = new CompanyListAdapter(cityListBeans);
                         rvContent.setAdapter(mContentAdapter);
                         mContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                startActivity(new Intent(view.getContext(),CompanyDetailActivity.class));
+                                Intent intent = new Intent(view.getContext(),CompanyDetailActivity.class);
+                                intent.putExtra(BOOTH_ID,cityListBeans.get(position).getBooth_id());
+                                startActivity(intent);
                             }
                         });
                     }

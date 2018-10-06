@@ -4,6 +4,20 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!-- Required -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,6 +26,17 @@
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/AppTheme">
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="luyuan.com.exhibition.fileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +46,6 @@
         </activity>
         <activity android:name=".ui.activity.CompanyListActivity"></activity>
         <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
-        <activity android:name="org.kymjs.chat.ChatActivity"></activity>
         <activity android:name=".ui.activity.MyPageActivity"></activity>
         <activity android:name=".ui.activity.ApplyExhibitionActivity"></activity>
         <activity android:name=".ui.activity.AddProductActivity"></activity>
@@ -31,10 +55,17 @@
         <activity android:name=".ui.activity.LoginPasswordActivity"></activity>
         <activity android:name=".ui.activity.RegistActivity"></activity>
         <activity android:name=".ui.activity.LoginYanZhengMaActivity"></activity>
-        <!-- 设置环信应用的appkey -->
-        <meta-data
-            android:name="EASEMOB_APPKEY"
-            android:value="easemob-demo#chatdemoui" />
+        <activity android:name=".ui.activity.ModifyNicknameActivity"></activity>
+        <activity android:name=".ui.activity.ClipImageActivity"></activity>
+        <activity android:name=".ui.activity.ProductDetailActivity"></activity>
+        <activity android:name=".ui.activity.ChatActivity"></activity>
+        <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
+        <activity android:name=".ui.activity.VoiceCallActivity"></activity>
+        <!---->
+         <!--设置环信应用的AppKey -->
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="1158180523146355#zhaunhui" />
+
+
 
     </application>
 
