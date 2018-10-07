@@ -61,4 +61,12 @@ public class SettingManager {
     public String getAccount(){
         return (String) helper.getSharedPreference("account","");
     }
+
+    public void setAddress(String telno) {
+        helper.put("address",telno);
+    }
+
+    public String getAddress(){
+        return (String) helper.getSharedPreference("address","");
+    }
 }

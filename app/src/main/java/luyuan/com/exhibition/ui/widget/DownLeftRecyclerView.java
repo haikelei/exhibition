@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
@@ -36,6 +37,14 @@ public class DownLeftRecyclerView extends FrameLayout {
     DownLeftAdapter mAdapter;
     private List<CityBean> cityList;
 
+    public interface OnLeftItemClickListener{
+        void onItemClick(CityBean bean);
+    }
+    private OnLeftItemClickListener mListener;
+    public void setOnLeftItemClickListener(OnLeftItemClickListener mListener){
+        this.mListener = mListener;
+    }
+
     public DownLeftRecyclerView(@NonNull Context context) {
         super(context);
         initView(context);
@@ -46,6 +55,14 @@ public class DownLeftRecyclerView extends FrameLayout {
         cityList = categoryBeans;
         mAdapter = new DownLeftAdapter(categoryBeans);
         rv.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                if (mListener!=null){
+                    mListener.onItemClick(cityList.get(position));
+                }
+            }
+        });
     }
 
     private void loadData() {
@@ -57,4 +74,6 @@ public class DownLeftRecyclerView extends FrameLayout {
         ButterKnife.bind(this);
         rv.setLayoutManager(new LinearLayoutManager(context));
     }
+
+
 }

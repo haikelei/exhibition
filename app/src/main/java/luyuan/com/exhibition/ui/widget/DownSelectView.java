@@ -44,4 +44,7 @@ public class DownSelectView extends RelativeLayout {
     public void setText(String s){
         tv.setText(s);
     }
+    public String getCity(){
+        return tv.getText().toString();
+    }
 }

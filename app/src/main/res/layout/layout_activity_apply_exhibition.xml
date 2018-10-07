@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/rl0"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
+            android:id="@+id/tv0"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:text="参展行业"
@@ -26,11 +27,13 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_settings"
+        android:layout_below="@id/rl0"
+        android:id="@+id/rl1"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <TextView
+            android:id="@+id/tv1"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:text="参展行业"
@@ -47,4 +50,20 @@
             android:layout_width="8dp"
             android:layout_height="14dp" />
     </RelativeLayout>
-</LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/rl1"
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:textColor="#ffffff"
+        android:background="@color/c_165ce8"
+        android:layout_alignParentBottom="true"
+        android:text="完成注册"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></TextView>
+</RelativeLayout>

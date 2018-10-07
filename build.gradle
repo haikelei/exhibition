@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.1.1'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.6.0'
 // Google Firebase cloud messaging
         classpath 'com.google.gms:google-services:3.1.1'
@@ -23,6 +23,9 @@ allprojects {
         jcenter()
         maven { url 'https://maven.google.com' }
         maven { url 'http://developer.huawei.com/repo'}
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
 

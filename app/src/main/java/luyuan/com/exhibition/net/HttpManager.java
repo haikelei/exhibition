@@ -62,5 +62,12 @@ public class HttpManager {
      *获取产品详情
      */
     public static final String PRODUCT_DETAIL = "Company/getProductDetails";
-
+    /**
+     *申请展位
+     */
+    public static final String APPLY_BOOTH = "Booth/createBooth";
+    /**
+     *获取用户资料
+     */
+    public static final String GET_USER_INFO = "User/getUserInfo";
 }

@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="90dp">
 
@@ -60,6 +61,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/rl_apply"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -91,6 +93,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/my_info"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
@@ -122,6 +125,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/rl_mypage"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
@@ -153,6 +157,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/rl_manage_product"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
@@ -185,6 +190,7 @@
 
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/rl_settings"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"

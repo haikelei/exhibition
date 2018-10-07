@@ -81,7 +81,9 @@ public class PlusTopBar extends RelativeLayout {
             }
         }else if (view.getId()==R.id.tv_plus){
             if (activity != null) {
-                activity.startActivity(new Intent(activity, AddProductActivity.class));
+                if (mOnTopBarClickListener!=null){
+                    mOnTopBarClickListener.onChatClick(view);
+                }
             }
         }
 

@@ -11,20 +11,21 @@ import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 /**
  * @author: lujialei
  * @date: 2018/10/3
- * @describe:
+ * @describe:我的主页
  */
 
 
-public class MyInfoActivity extends BaseActivity {
+public class ServiceExhibitionActivity extends BaseActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_activity_my_info);
+        setContentView(R.layout.layout_activity_exhibition_service);
     }
 
     @Override
     protected View onCreateTopBar(ViewGroup view) {
-        DefaultTopBar topBar = new DefaultTopBar(this,"我的资料",true);
+        DefaultTopBar topBar = new DefaultTopBar(this,"会展综合服务",true);
         return topBar;
     }
 }

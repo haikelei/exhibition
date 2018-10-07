@@ -30,9 +30,9 @@ import luyuan.com.exhibition.bean.LoginBean;
 import luyuan.com.exhibition.ui.activity.ApplyExhibitionActivity;
 import luyuan.com.exhibition.ui.activity.LoginPasswordActivity;
 import luyuan.com.exhibition.ui.activity.ManageProductActivity;
-import luyuan.com.exhibition.ui.activity.MyInfoActivity;
-import luyuan.com.exhibition.ui.activity.MyPageActivity;
 import luyuan.com.exhibition.ui.activity.SettingActivity;
+import luyuan.com.exhibition.ui.activity.MyInfomationActivity;
+import luyuan.com.exhibition.ui.activity.MyPageActivity;
 import luyuan.com.exhibition.utils.Const;
 import luyuan.com.exhibition.utils.SettingManager;
 
@@ -119,7 +119,8 @@ public class MineFragment extends Fragment {
                 startActivity(new Intent(getContext(), ApplyExhibitionActivity.class));
                 break;
             case R.id.my_info://我的资料
-                startActivity(new Intent(getContext(), MyInfoActivity.class));
+                startActivity(new Intent(getContext(), MyInfomationActivity.class));
+
                 break;
             case R.id.rl_mypage://我的主页
                 startActivity(new Intent(getContext(), MyPageActivity.class));

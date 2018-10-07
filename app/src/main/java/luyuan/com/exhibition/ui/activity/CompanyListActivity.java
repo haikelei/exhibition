@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -37,6 +38,7 @@ import luyuan.com.exhibition.bean.CompanyListBean;
 import luyuan.com.exhibition.bean.param.GetCompanyParam;
 import luyuan.com.exhibition.net.HttpManager;
 import luyuan.com.exhibition.ui.adapter.CompanyListAdapter;
+import luyuan.com.exhibition.ui.adapter.DownRightAdapter;
 import luyuan.com.exhibition.ui.widget.DownLeftRecyclerView;
 import luyuan.com.exhibition.ui.widget.DownRightRecyclerView;
 import luyuan.com.exhibition.ui.widget.DownSelectView;
@@ -107,35 +109,47 @@ public class CompanyListActivity extends BaseActivity {
         categoryBean = (CategoryBean) getIntent().getSerializableExtra(CATEGORY_BEAN);
         initView();
         loadData();
+        loadCategorys();
     }
 
-    private void initView() {
-        if (categoryBean != null) {
-            downViewRight.setText(categoryBean.getName());
-        }
-        rvContent.setLayoutManager(new GridLayoutManager(this,4));
-
-    }
-
-    private void loadData() {
-        HttpManager.post(HttpManager.GET_CITY_LIST)
-                .execute(new SimpleCallBack<List<CityBean>>() {
+    private List<CategoryBean> categorysList;
+    private void loadCategorys() {
+        HttpManager.post("Trade/getCategoryTree")
+                .execute(new SimpleCallBack<List<CategoryBean>>() {
                     @Override
                     public void onError(ApiException e) {
 
                     }
 
                     @Override
-                    public void onSuccess(List<CityBean> categoryBeans) {
-                        downViewLeft.setText(categoryBeans.get(0).getRegion_name());
-                        cityList = categoryBeans;
-                        getLocation();
+                    public void onSuccess(List<CategoryBean> categoryBeans) {
+//                        寻找所有二级分类
+                        ArrayList list = new ArrayList();
+                        for (int i = 0; i < categoryBeans.size(); i++) {
+                            List<CategoryBean> list1 = categoryBeans.get(i).getChildren();
+                            if (list1!=null){
+                                list.addAll(list1);
+                            }
+
+                        }
+                        categorysList = list;
                     }
                 });
+    }
 
+    private void loadCompany() {
         GetCompanyParam param = new GetCompanyParam();
         if (categoryBean != null) {
             param.trade_id = categoryBean.getTrade_id();
+        }
+        if (!TextUtils.isEmpty(downViewLeft.getCity())){
+            String city = downViewLeft.getCity();
+            for (int i = 0; i < cityList.size(); i++) {
+                String listCity = cityList.get(i).getRegion_name();
+                if (city.contains(listCity) || listCity.contains(city) ){
+                    param.city_id = cityList.get(i).getCity_id();
+                }
+            }
         }
         HttpManager.post(HttpManager.GET_COMPANY_LIST)
                 .customParams(param)
@@ -159,8 +173,32 @@ public class CompanyListActivity extends BaseActivity {
                         });
                     }
                 });
+    }
 
+    private void initView() {
+        if (categoryBean != null) {
+            downViewRight.setText(categoryBean.getName());
+        }
+        rvContent.setLayoutManager(new GridLayoutManager(this,4));
 
+    }
+
+    private void loadData() {
+        HttpManager.post(HttpManager.GET_CITY_LIST)
+                .execute(new SimpleCallBack<List<CityBean>>() {
+                    @Override
+                    public void onError(ApiException e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(List<CityBean> categoryBeans) {
+                        downViewLeft.setText(categoryBeans.get(0).getRegion_name());
+                        cityList = categoryBeans;
+                        getLocation();
+                        loadCompany();
+                    }
+                });
     }
 
     private PermissionHelper mPermissionHelper;
@@ -227,6 +265,14 @@ public class CompanyListActivity extends BaseActivity {
                         left.setData(cityList);
                     }
                     left.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
+                    left.setOnLeftItemClickListener(new DownLeftRecyclerView.OnLeftItemClickListener() {
+                        @Override
+                        public void onItemClick(CityBean bean) {
+                            downViewLeft.setText(bean.getRegion_name());
+                            left.setVisibility(View.GONE);
+                            loadCompany();
+                        }
+                    });
                     Rect rect = new Rect();
                     downViewLeft.getGlobalVisibleRect(rect);
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(rect.width(), 800);
@@ -241,6 +287,19 @@ public class CompanyListActivity extends BaseActivity {
                 if (right == null) {
                     right = new DownRightRecyclerView(this);
                     right.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
+                    if (categorysList!=null){
+                        right.setData(categorysList);
+                    }
+                    right.setOnRightItemClickListener(new DownRightRecyclerView.OnRightItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            CategoryBean bean = categorysList.get(position);
+                            categoryBean = bean;
+                            downViewRight.setText(bean.getName());
+                            right.setVisibility(View.GONE);
+                            loadCompany();
+                        }
+                    });
                     Rect rect2 = new Rect();
                     downViewRight.getGlobalVisibleRect(rect2);
                     RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(rect2.width(), 800);

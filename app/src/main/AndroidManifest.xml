@@ -19,10 +19,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
+        android:testOnly="false"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:name=".MyApplication"
         android:theme="@style/AppTheme">
@@ -49,9 +49,9 @@
         <activity android:name=".ui.activity.MyPageActivity"></activity>
         <activity android:name=".ui.activity.ApplyExhibitionActivity"></activity>
         <activity android:name=".ui.activity.AddProductActivity"></activity>
-        <activity android:name=".ui.activity.MyInfoActivity"></activity>
-        <activity android:name=".ui.activity.ManageProductActivity"></activity>
         <activity android:name=".ui.activity.SettingActivity"></activity>
+        <activity android:name=".ui.activity.ManageProductActivity"></activity>
+        <activity android:name=".ui.activity.MyInfomationActivity"></activity>
         <activity android:name=".ui.activity.LoginPasswordActivity"></activity>
         <activity android:name=".ui.activity.RegistActivity"></activity>
         <activity android:name=".ui.activity.LoginYanZhengMaActivity"></activity>
@@ -61,6 +61,11 @@
         <activity android:name=".ui.activity.ChatActivity"></activity>
         <activity android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"></activity>
         <activity android:name=".ui.activity.VoiceCallActivity"></activity>
+        <activity android:name=".ui.activity.ServiceCompanyActivity"></activity>
+        <activity android:name=".ui.activity.ServiceExhibitionActivity"></activity>
+        <activity android:name=".ui.activity.ModifyAddressActivity"></activity>
+        <activity android:name=".ui.activity.ModifyPhoneActivity"></activity>
+        <activity android:name=".ui.activity.ModifyEmailActivity"></activity>
         <!---->
          <!--设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="1158180523146355#zhaunhui" />

@@ -29,6 +29,8 @@ import luyuan.com.exhibition.ui.adapter.HomeAdapter;
 import luyuan.com.exhibition.ui.widget.HomeBannerView;
 import luyuan.com.exhibition.ui.widget.HomeServiceView;
 
+import static luyuan.com.exhibition.ui.activity.CompanyListActivity.CATEGORY_BEAN;
+
 /**
  * @author: lujialei
  * @date: 2018/9/27
@@ -90,7 +92,9 @@ public class HomeFragment extends Fragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                startActivity(new Intent(getContext(), CompanyListActivity.class));
+                Intent intent = new Intent(getContext(), CompanyListActivity.class);
+                intent.putExtra(CATEGORY_BEAN,list.get(position));
+                startActivity(intent);
             }
         });
     }

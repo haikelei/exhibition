@@ -23,7 +23,7 @@ import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 /**
  * @author: lujialei
  * @date: 2018/10/3
- * @describe:我的主页
+ * @describe:产品详情
  */
 
 
