@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_marginTop="1dp"
-        android:id="@+id/rl_email"
+        android:id="@+id/rl_phone"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_below="@id/rl_address">
@@ -20,7 +20,7 @@
             android:textColor="#333333" />
 
         <TextView
-            android:id="@+id/tv_email"
+            android:id="@+id/tv_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -28,15 +28,15 @@
             android:layout_marginRight="32dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray"
-            android:text="11123456" />
+            />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_marginTop="1dp"
-        android:id="@+id/rl_zhizhao"
+        android:id="@+id/rl_password"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_below="@id/rl_email">
+        android:layout_below="@id/rl_phone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,6 +59,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_logout"
         android:layout_marginTop="50dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"

@@ -116,17 +116,30 @@ public class MineFragment extends Fragment {
                 }
                 break;
             case R.id.rl_apply://申请展位
-                startActivity(new Intent(getContext(), ApplyExhibitionActivity.class));
+                if (SettingManager.getInstance().isLogin()) {
+                    startActivity(new Intent(getContext(), ApplyExhibitionActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(), LoginPasswordActivity.class));
+                }
                 break;
             case R.id.my_info://我的资料
                 startActivity(new Intent(getContext(), MyInfomationActivity.class));
-
                 break;
             case R.id.rl_mypage://我的主页
-                startActivity(new Intent(getContext(), MyPageActivity.class));
+                if (SettingManager.getInstance().isLogin()) {
+                    startActivity(new Intent(getContext(), MyPageActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(), LoginPasswordActivity.class));
+                }
+
                 break;
             case R.id.rl_manage_product://管理产品
-                startActivity(new Intent(getContext(), ManageProductActivity.class));
+                if (SettingManager.getInstance().isLogin()) {
+                    startActivity(new Intent(getContext(), ManageProductActivity.class));
+                } else {
+                    startActivity(new Intent(getContext(), LoginPasswordActivity.class));
+                }
+
                 break;
             case R.id.rl_settings://设置
                 startActivity(new Intent(getContext(), SettingActivity.class));

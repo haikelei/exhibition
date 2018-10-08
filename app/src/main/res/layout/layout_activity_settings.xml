@@ -87,7 +87,7 @@
 
     <RelativeLayout
         android:layout_marginTop="1dp"
-        android:id="@+id/rl_phone"
+        android:id="@+id/rl_email"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_below="@id/rl_not_nessary">
@@ -116,7 +116,7 @@
         android:id="@+id/rl_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_below="@id/rl_phone">
+        android:layout_below="@id/rl_email">
 
         <TextView
             android:layout_width="wrap_content"
@@ -139,7 +139,7 @@
 
     <RelativeLayout
         android:layout_marginTop="1dp"
-        android:id="@+id/rl_email"
+        android:id="@+id/rl_phone"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_below="@id/rl_address">
@@ -169,7 +169,7 @@
         android:id="@+id/rl_zhizhao"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_below="@id/rl_email">
+        android:layout_below="@id/rl_phone">
 
         <TextView
             android:layout_width="wrap_content"

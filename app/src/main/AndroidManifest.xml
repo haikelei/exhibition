@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="luyuan.com.exhibition">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -19,6 +20,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
+        tools:replace="android:icon"
         android:testOnly="false"
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -66,6 +68,7 @@
         <activity android:name=".ui.activity.ModifyAddressActivity"></activity>
         <activity android:name=".ui.activity.ModifyPhoneActivity"></activity>
         <activity android:name=".ui.activity.ModifyEmailActivity"></activity>
+        <activity android:name=".ui.activity.CategoryActivity"></activity>
         <!---->
          <!--设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="1158180523146355#zhaunhui" />

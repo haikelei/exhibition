@@ -70,4 +70,29 @@ public class HttpManager {
      *获取用户资料
      */
     public static final String GET_USER_INFO = "User/getUserInfo";
+    /**
+     *验证码登录
+     */
+    public static final String YANZHENGMA_LOGIN = "User/getLoginByTelno";
+    /**
+     *增加产品
+     */
+    public static final String ADD_PRODUCT = "Products/addProduct";
+    /**
+     *编辑主页
+     */
+    public static final String EDIT_MYPAGE = "Homepage/updateHomepage";
+    /**
+     *获取产品列表
+     */
+    public static final String GET_PRODUCT_LIST = "Products/getUserProductList";
+    /**
+     *删除产品
+     */
+    public static final String DELETE_PRODUCT = "Products/deleteProducts";
+    /**
+     *获取child产品
+     */
+    public static final String CHILD_PRODUCT = "Trade/getChildrenByParentId";
+
 }

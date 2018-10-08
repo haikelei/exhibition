@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMChatManager;
 import com.hyphenate.chat.EMClient;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
@@ -53,14 +52,14 @@ public class LoginPasswordActivity extends BaseActivity {
         return topBar;
     }
 
-    @OnClick({R.id.tv_regist, R.id.tv_login_yanzhengma, R.id.tv_login})
+    @OnClick({R.id.tv_regist, R.id.tv_login_mima, R.id.tv_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_regist:
                 startActivity(new Intent(this,RegistActivity.class));
                 finish();
                 break;
-            case R.id.tv_login_yanzhengma:
+            case R.id.tv_login_mima:
                 startActivity(new Intent(this,LoginYanZhengMaActivity.class));
                 finish();
                 break;
@@ -85,7 +84,7 @@ public class LoginPasswordActivity extends BaseActivity {
                 .execute(new SimpleCallBack<LoginBean>() {
                     @Override
                     public void onError(ApiException e) {
-
+                        Toast.makeText(getBaseContext(),"登录失败",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

@@ -27,7 +27,7 @@ public class CategoryBean  extends ApiResult implements Serializable{
     private int trade_id;
     private int parent_id;
     private String name;
-    private Object icon;
+    private String icon;
     private List<CategoryBean> children;
 
     public int getTrade_id() {
@@ -54,11 +54,11 @@ public class CategoryBean  extends ApiResult implements Serializable{
         this.name = name;
     }
 
-    public Object getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(Object icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 

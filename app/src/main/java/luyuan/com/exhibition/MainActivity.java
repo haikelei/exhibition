@@ -1,5 +1,6 @@
 package luyuan.com.exhibition;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,8 @@ import luyuan.com.exhibition.ui.activity.VoiceCallActivity;
 import luyuan.com.exhibition.ui.widget.BottomNavigationView;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.ui.widget.HomeServiceView;
+import luyuan.com.exhibition.utils.PermissionHelper;
+import luyuan.com.exhibition.utils.PermissionInterface;
 
 public class MainActivity extends BaseActivity {
 
@@ -38,6 +41,39 @@ public class MainActivity extends BaseActivity {
         bottomView.initFragment(getSupportFragmentManager());
         initListener();
         setBrocast();
+        initPermission();
+    }
+
+    private PermissionHelper mPermissionHelper;
+
+    private void initPermission() {
+        mPermissionHelper = new PermissionHelper(this, new PermissionInterface() {
+            @Override
+            public int getPermissionsRequestCode() {
+                return 10000;
+            }
+
+            @Override
+            public String[] getPermissions() {
+                return new String[]{
+                        Manifest.permission.RECORD_AUDIO,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                };
+            }
+
+            @Override
+            public void requestPermissionsSuccess() {
+            }
+
+            @Override
+            public void requestPermissionsFail() {
+
+            }
+        });
+        mPermissionHelper.requestPermissions();
+
     }
 
 

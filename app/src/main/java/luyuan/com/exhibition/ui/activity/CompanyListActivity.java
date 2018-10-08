@@ -82,10 +82,13 @@ public class CompanyListActivity extends BaseActivity {
                 addList = ge.getFromLocation(data[0], data[1], 1);
                 if (addList != null && addList.get(0) != null) {
                     String mCity = addList.get(0).getLocality();
+                    if (mCity==null){
+                        return;
+                    }
                     if (mCity != null && cityList != null) {
                         for (int i = 0; i < cityList.size(); i++) {
                             String city = cityList.get(i).getRegion_name();
-                            if (mCity.contains(city)) {
+                            if (city!=null&&mCity!=null&&mCity.contains(city)) {
                                 downViewLeft.setText(city);
                             }
                         }
@@ -145,9 +148,13 @@ public class CompanyListActivity extends BaseActivity {
         if (!TextUtils.isEmpty(downViewLeft.getCity())){
             String city = downViewLeft.getCity();
             for (int i = 0; i < cityList.size(); i++) {
-                String listCity = cityList.get(i).getRegion_name();
-                if (city.contains(listCity) || listCity.contains(city) ){
-                    param.city_id = cityList.get(i).getCity_id();
+                if (cityList.get(i)!=null){
+                    String listCity = cityList.get(i).getRegion_name();
+                    if (city!=null&& listCity!=null){
+                        if (city.contains(listCity) || listCity.contains(city) ){
+                            param.city_id = cityList.get(i).getCity_id();
+                        }
+                    }
                 }
             }
         }

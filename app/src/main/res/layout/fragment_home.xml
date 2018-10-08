@@ -4,7 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<android.support.v7.widget.RecyclerView
+    <luyuan.com.exhibition.ui.widget.HomeBannerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></luyuan.com.exhibition.ui.widget.HomeBannerView>
+    <luyuan.com.exhibition.ui.widget.HomeServiceView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></luyuan.com.exhibition.ui.widget.HomeServiceView>
+    <android.support.v7.widget.RecyclerView
     android:id="@+id/rv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>

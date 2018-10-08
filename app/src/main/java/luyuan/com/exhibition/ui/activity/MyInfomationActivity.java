@@ -116,7 +116,6 @@ public class MyInfomationActivity extends BaseActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         initView();
-        loadData();
     }
 
 
@@ -126,7 +125,9 @@ public class MyInfomationActivity extends BaseActivity {
                 .execute(new SimpleCallBack<UserBean>() {
                     @Override
                     public void onError(ApiException e) {
-
+                        if (e.getCode()==401){
+                            finish();
+                        }
                     }
 
                     @Override
@@ -184,7 +185,7 @@ public class MyInfomationActivity extends BaseActivity {
         return topBar;
     }
 
-    @OnClick({R.id.rl_logo, R.id.rl_nickname, R.id.rl_phone, R.id.rl_address, R.id.rl_email, R.id.rl_zhizhao, R.id.rl_faren})
+    @OnClick({R.id.rl_logo, R.id.rl_nickname, R.id.rl_email, R.id.rl_address, R.id.rl_phone, R.id.rl_zhizhao, R.id.rl_faren})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_logo:

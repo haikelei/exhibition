@@ -69,4 +69,13 @@ public class SettingManager {
     public String getAddress(){
         return (String) helper.getSharedPreference("address","");
     }
+
+    public void logout() {
+        helper.put("nick_name","");
+        helper.put("avatar","");
+        helper.put("token","");
+        helper.put("account","");
+        helper.put("account","");
+        helper.put("address","");
+    }
 }

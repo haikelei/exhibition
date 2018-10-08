@@ -14,6 +14,7 @@
         android:layout_width="240dp"
         android:layout_height="match_parent" />
     <TextView
+        android:id="@+id/tv_yanzhengma"
         android:layout_marginLeft="15dp"
         android:textColor="#165ce8"
         android:textSize="14sp"
@@ -28,7 +29,7 @@
     <EditText
         android:layout_below="@id/rl_phone"
         android:id="@+id/et_password"
-        android:hint="请输入密码"
+        android:hint="请输入验证码"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_width="340dp"
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_login_yanzhengma"
+            android:id="@+id/tv_login_mima"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
             android:textSize="15sp"

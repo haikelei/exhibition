@@ -234,7 +234,7 @@ public class ApplyExhibitionActivity extends BaseActivity {
         startActivityForResult(intent, REQUEST_CAPTURE);
     }
 
-    ArrayList uploadList = new ArrayList();
+    ArrayList<File> uploadList = new ArrayList();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -247,9 +247,14 @@ public class ApplyExhibitionActivity extends BaseActivity {
                     File file = new File(cropImagePath);
                     ApplyBean bean = new ApplyBean(MutipleItem.IMG);
                     bean.setPath(cropImagePath);
+                    for (int i = 0; i < list.size(); i++) {
+                        if (i!=list.size()-1){
+                            list.remove(i);
+                        }
+                    }
                     list.add(0, bean);
                     mAdapter.notifyDataSetChanged();
-                    uploadList.add(file);
+                    uploadList.add(0,file);
                 }
                 break;
             case REQUEST_PICK:  //调用系统相册返回
@@ -259,10 +264,15 @@ public class ApplyExhibitionActivity extends BaseActivity {
                     Bitmap bitMap = BitmapFactory.decodeFile(cropImagePath);
                     ApplyBean bean = new ApplyBean(MutipleItem.IMG);
                     bean.setPath(cropImagePath);
+                    for (int i = 0; i < list.size(); i++) {
+                        if (i!=list.size()-1){
+                            list.remove(i);
+                        }
+                    }
                     list.add(0, bean);
                     mAdapter.notifyDataSetChanged();
                     File file = new File(cropImagePath);
-                    uploadList.add(file);
+                    uploadList.add(0,file);
                 }
                 break;
             case REQUEST_CROP_PHOTO:  //剪切图片返回
@@ -301,8 +311,10 @@ public class ApplyExhibitionActivity extends BaseActivity {
                 }
                 break;
             case R.id.tv_confirm:
-                if (mCurrentFirstTradeId!=-1 && mSecondTradeId!=-1&&uploadList!=null){
+                if (mCurrentFirstTradeId!=-1 && mSecondTradeId!=-1&&uploadList!=null&&uploadList.size()>=1){
                     apply();
+                }else {
+                    Toast.makeText(getBaseContext(),"请填写完整参数",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -312,7 +324,7 @@ public class ApplyExhibitionActivity extends BaseActivity {
         HttpManager.post(HttpManager.APPLY_BOOTH)
                 .params("token", SettingManager.getInstance().getToken())
                 .params("trade_id",String.valueOf(mSecondTradeId))
-                .addFileParams("image", uploadList, new ProgressResponseCallBack() {
+                .params("image",uploadList.get(0),new ProgressResponseCallBack() {
                     @Override
                     public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
 

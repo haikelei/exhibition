@@ -16,29 +16,39 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.zhouyou.http.body.ProgressResponseCallBack;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import luyuan.com.exhibition.BuildConfig;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.ApplyBean;
+import luyuan.com.exhibition.bean.EditMyPageBean;
+import luyuan.com.exhibition.net.HttpManager;
 import luyuan.com.exhibition.ui.adapter.ApplyAdapter;
 import luyuan.com.exhibition.ui.adapter.MutipleItem;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.utils.FileUtil;
+import luyuan.com.exhibition.utils.SettingManager;
 
 import static luyuan.com.exhibition.utils.FileUtil.getRealFilePathFromUri;
 
@@ -53,6 +63,10 @@ public class MyPageActivity extends BaseActivity {
 
     @BindView(R.id.rv)
     RecyclerView rv;
+    @BindView(R.id.tv_confirm)
+    TextView tvConfirm;
+    @BindView(R.id.et)
+    EditText et;
     private ArrayList list;
     private ApplyAdapter mAdapter;
 
@@ -230,5 +244,37 @@ public class MyPageActivity extends BaseActivity {
     protected View onCreateTopBar(ViewGroup view) {
         DefaultTopBar topBar = new DefaultTopBar(this, "我的主页", true);
         return topBar;
+    }
+
+    @OnClick(R.id.tv_confirm)
+    public void onViewClicked() {
+        if (uploadList.size() >= 1 && !TextUtils.isEmpty(et.getText().toString().trim())){
+            save();
+        }else {
+            Toast.makeText(getBaseContext(),"请填写完整",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void save() {
+        HttpManager.post(HttpManager.EDIT_MYPAGE)
+                .params("token", SettingManager.getInstance().getToken())
+                .params("content",et.getText().toString().trim())
+                .addFileParams("image", uploadList, new ProgressResponseCallBack() {
+                    @Override
+                    public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
+
+                    }
+                })
+                .execute(new SimpleCallBack<EditMyPageBean>() {
+                    @Override
+                    public void onError(ApiException e) {
+                        Toast.makeText(getBaseContext(),"修改失败",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(EditMyPageBean editMyPageBean) {
+                        finish();
+                    }
+                });
     }
 }

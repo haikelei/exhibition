@@ -24,11 +24,13 @@ import butterknife.Unbinder;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CategoryBean;
 import luyuan.com.exhibition.net.HttpManager;
+import luyuan.com.exhibition.ui.activity.CategoryActivity;
 import luyuan.com.exhibition.ui.activity.CompanyListActivity;
 import luyuan.com.exhibition.ui.adapter.HomeAdapter;
 import luyuan.com.exhibition.ui.widget.HomeBannerView;
 import luyuan.com.exhibition.ui.widget.HomeServiceView;
 
+import static luyuan.com.exhibition.ui.activity.CategoryActivity.PARENT_ID;
 import static luyuan.com.exhibition.ui.activity.CompanyListActivity.CATEGORY_BEAN;
 
 /**
@@ -63,7 +65,6 @@ public class HomeFragment extends Fragment {
 
     private void loadData(){
                 HttpManager.post("Trade/getCategoryTree")
-//                .upJson("{\"\":\"\",\"\":\"\",\"\":\"\",\"swry_dm\":\"127053096\",\"version\":\"1.0.0\"}")
                 //这里不想解析，简单只是为了做演示 直接返回String
                 .execute(new SimpleCallBack<List<CategoryBean>>() {
                     @Override
@@ -86,14 +87,12 @@ public class HomeFragment extends Fragment {
     private void initView() {
         rv.setLayoutManager(new GridLayoutManager(getContext(),4));
         mAdapter= new HomeAdapter(list);
-        mAdapter.addHeaderView(new HomeBannerView(getContext()));
-        mAdapter.addHeaderView(new HomeServiceView(getContext()));
         rv.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getContext(), CompanyListActivity.class);
-                intent.putExtra(CATEGORY_BEAN,list.get(position));
+                Intent intent = new Intent(getContext(), CategoryActivity.class);
+                intent.putExtra(PARENT_ID,list.get(position).getTrade_id());
                 startActivity(intent);
             }
         });

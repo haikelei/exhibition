@@ -79,15 +79,15 @@ public class CategoryFragment extends Fragment {
                     public void onSuccess(List<CategoryBean> categoryBeans) {
                         leftList.addAll(categoryBeans);
                         mLeftAdapter.notifyDataSetChanged();
-                        generateRightList();
-                        mRightAdapter.notifyDataSetChanged();
+
                     }
                 });
     }
 
-    private void generateRightList() {
+    private void refreshRightList(int leftId) {
+        rightList.clear();
         for (int i = 0; i < leftList.size(); i++) {
-            if (leftList.get(i).getChildren()!=null){
+            if (leftId==leftList.get(i).getTrade_id() && leftList.get(i).getChildren()!=null) {
                 rightList.addAll(leftList.get(i).getChildren());
             }
         }
@@ -107,22 +107,15 @@ public class CategoryFragment extends Fragment {
                 mLeftAdapter.notifyDataSetChanged();
 
                 int leftId = leftList.get(position).getTrade_id();
-                for (int i = 0; i < rightList.size(); i++) {
-                    int rightId = rightList.get(i).getParent_id();
-                    if (leftId==rightId){
-                        rvRight.smoothScrollToPosition(i);
-                        return;
-                    }
-                }
-
-
+                refreshRightList(leftId);
+                mRightAdapter.notifyDataSetChanged();
             }
         });
         mRightAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(getContext(), CompanyListActivity.class);
-                intent.putExtra(CATEGORY_BEAN,rightList.get(position));
+                intent.putExtra(CATEGORY_BEAN, rightList.get(position));
                 startActivity(intent);
             }
         });
