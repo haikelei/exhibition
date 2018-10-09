@@ -121,7 +121,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(int index) {
                 if (index==0){
-                    topBar.setTitle("汇展俱乐部");
+                    topBar.setTitle("天鹄国际");
                 }else if (index==1){
                     topBar.setTitle("分类");
                 }else if (index==2){
@@ -135,7 +135,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected View onCreateTopBar(ViewGroup view) {
-        topBar = new DefaultTopBar(this,"汇展俱乐部");
+        topBar = new DefaultTopBar(this,"天鹄国际");
         return topBar;
     }
 
@@ -163,5 +163,11 @@ public class MainActivity extends BaseActivity {
             }
             EMLog.d("CallReceiver", "app received a incoming call");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
     }
 }

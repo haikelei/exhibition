@@ -9,33 +9,37 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_weight="1">
-        <RelativeLayout
-            android:background="#ffffff"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<RelativeLayout-->
+            <!--android:background="#ffffff"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-            <RelativeLayout
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-            <ImageView
-                android:src="@mipmap/home_exhibition"
-                android:id="@+id/iv0"
-                android:layout_centerVertical="true"
-                android:layout_width="34dp"
-                android:layout_height="34dp" />
-            <TextView
-                android:text="会展综合服务"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#165ce8"
-                android:layout_toRightOf="@id/iv0"
-                android:layout_marginLeft="12dp"
-                />
-            </RelativeLayout>
-        </RelativeLayout>
+            <!--<RelativeLayout-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+            <!--<ImageView-->
+                <!--android:src="@mipmap/home_exhibition"-->
+                <!--android:id="@+id/iv0"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_width="34dp"-->
+                <!--android:layout_height="34dp" />-->
+            <!--<TextView-->
+                <!--android:text="会展综合服务"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="16sp"-->
+                <!--android:textColor="#165ce8"-->
+                <!--android:layout_toRightOf="@id/iv0"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--/>-->
+            <!--</RelativeLayout>-->
+        <!--</RelativeLayout>-->
+        <ImageView
+            android:src="@drawable/test2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </FrameLayout>
 
     <FrameLayout
@@ -43,34 +47,37 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_weight="1">
-        <RelativeLayout
-            android:background="#ffffff"
+        <!--<RelativeLayout-->
+            <!--android:background="#ffffff"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<RelativeLayout-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content">-->
+                <!--<ImageView-->
+                    <!--android:src="@mipmap/home_enterprise"-->
+                    <!--android:id="@+id/iv1"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_width="34dp"-->
+                    <!--android:layout_height="34dp" />-->
+                <!--<TextView-->
+                    <!--android:text="企业综合服务"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="16sp"-->
+                    <!--android:textColor="#165ce8"-->
+                    <!--android:layout_toRightOf="@id/iv1"-->
+                    <!--android:layout_marginLeft="12dp"-->
+                    <!--/>-->
+            <!--</RelativeLayout>-->
+        <!--</RelativeLayout>-->
+        <ImageView
+            android:src="@drawable/test1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RelativeLayout
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@mipmap/home_enterprise"
-                    android:id="@+id/iv1"
-                    android:layout_centerVertical="true"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp" />
-                <TextView
-                    android:text="企业综合服务"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="#165ce8"
-                    android:layout_toRightOf="@id/iv1"
-                    android:layout_marginLeft="12dp"
-                    />
-            </RelativeLayout>
-        </RelativeLayout>
-
+            android:layout_height="match_parent" />
 
     </FrameLayout>
 

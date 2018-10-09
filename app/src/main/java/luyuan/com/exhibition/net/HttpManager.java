@@ -94,5 +94,9 @@ public class HttpManager {
      *获取child产品
      */
     public static final String CHILD_PRODUCT = "Trade/getChildrenByParentId";
+    /**
+     *获取全部地区
+     */
+    public static final String GET_PROVINCES = "Overall/getRegions";
 
 }

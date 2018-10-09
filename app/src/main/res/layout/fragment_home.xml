@@ -5,9 +5,10 @@
     android:background="#f6f6f6"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <luyuan.com.exhibition.ui.widget.HomeBannerView
+    <cn.jzvd.JzvdStd
+        android:id="@+id/jz_video"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></luyuan.com.exhibition.ui.widget.HomeBannerView>
+        android:layout_height="200dp" />
     <luyuan.com.exhibition.ui.widget.HomeServiceView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></luyuan.com.exhibition.ui.widget.HomeServiceView>

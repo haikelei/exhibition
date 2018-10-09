@@ -2,7 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:textColor="#ffffff"
+        android:background="@color/gray_normal"
+        android:text="请点击选择地区"
+        android:gravity="center"
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
     <EditText
+        android:hint="请输入具体地址"
+        android:layout_below="@id/tv_title"
         android:id="@+id/et"
         android:layout_width="match_parent"
         android:layout_height="50dp" />

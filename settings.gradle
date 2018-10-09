@@ -1,1 +1,1 @@
-include ':app', ':libraryAdapter', ':libraryNet', ':easeui'
+include ':app', ':libraryAdapter', ':libraryNet', ':easeui', ':libraryVideo'

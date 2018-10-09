@@ -334,11 +334,12 @@ public class ApplyExhibitionActivity extends BaseActivity {
                     @Override
                     public void onError(ApiException e) {
                         e.printStackTrace();
+                        Toast.makeText(getBaseContext(),"申请失败",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onSuccess(UserInfoBean userInfoBean) {
-                        Toast.makeText(ApplyExhibitionActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ApplyExhibitionActivity.this,"申请成功",Toast.LENGTH_LONG).show();
                         finish();
                     }
                 });

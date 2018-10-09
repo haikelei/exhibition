@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">展会</string>
+    <string name="app_name">天鹄国际</string>
 
     <string name="text_ack_msg">已读</string>
     <string name="text_delivered_msg">送达</string>
