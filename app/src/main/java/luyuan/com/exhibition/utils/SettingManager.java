@@ -70,6 +70,14 @@ public class SettingManager {
         return (String) helper.getSharedPreference("address","");
     }
 
+    public void setCityId(String telno) {
+        helper.put("cityId",telno);
+    }
+
+    public String getCityId(){
+        return (String) helper.getSharedPreference("cityId","");
+    }
+
     public void logout() {
         helper.put("nick_name","");
         helper.put("avatar","");
@@ -77,5 +85,6 @@ public class SettingManager {
         helper.put("account","");
         helper.put("account","");
         helper.put("address","");
+        helper.put("cityId","");
     }
 }

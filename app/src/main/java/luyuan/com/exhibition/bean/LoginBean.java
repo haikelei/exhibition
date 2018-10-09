@@ -73,6 +73,7 @@ public class LoginBean {
         private String nickname;
         private String headimgurl;
         private int complete_percent;
+        public String city_id;
 
         public String getNickname() {
             return nickname;

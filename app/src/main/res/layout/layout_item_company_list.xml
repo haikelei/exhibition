@@ -6,7 +6,6 @@
     <ImageView
         android:layout_centerHorizontal="true"
         android:id="@+id/iv"
-        android:background="#880000"
         android:layout_width="75dp"
         android:layout_height="75dp" />
 

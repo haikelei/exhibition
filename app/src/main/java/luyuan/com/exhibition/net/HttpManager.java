@@ -99,4 +99,5 @@ public class HttpManager {
      */
     public static final String GET_PROVINCES = "Overall/getRegions";
 
+
 }

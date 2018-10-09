@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,16 +37,21 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.widget.WheelView;
 import luyuan.com.exhibition.BuildConfig;
+import luyuan.com.exhibition.R;
+import luyuan.com.exhibition.bean.CityBean;
 import luyuan.com.exhibition.bean.UserBean;
+import luyuan.com.exhibition.bean.UserInfoBean;
 import luyuan.com.exhibition.event.EventModifyAvatar;
 import luyuan.com.exhibition.event.EventModifyNickname;
-import luyuan.com.exhibition.R;
-import luyuan.com.exhibition.bean.UserInfoBean;
 import luyuan.com.exhibition.net.HttpManager;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.utils.Const;
@@ -104,10 +110,13 @@ public class MyInfomationActivity extends BaseActivity {
     private static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 103;
     //请求写入外部存储
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 104;
+    @BindView(R.id.tv_city)
+    TextView tvCity;
     //调用照相机返回图片文件
     private File tempFile;
     // 1: qq, 2: weixin
-    private int type=2;
+    private int type = 2;
+    private List<CityBean> cityList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,16 +125,32 @@ public class MyInfomationActivity extends BaseActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         initView();
+        loadCitys();
+    }
+
+    private void loadCitys() {
+        HttpManager.post(HttpManager.GET_CITY_LIST)
+                .execute(new SimpleCallBack<List<CityBean>>() {
+                    @Override
+                    public void onError(ApiException e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(List<CityBean> categoryBeans) {
+                        cityList = categoryBeans;
+                    }
+                });
     }
 
 
     private void loadData() {
         HttpManager.post(HttpManager.GET_USER_INFO)
-                .params("token",SettingManager.getInstance().getToken())
+                .params("token", SettingManager.getInstance().getToken())
                 .execute(new SimpleCallBack<UserBean>() {
                     @Override
                     public void onError(ApiException e) {
-                        if (e.getCode()==401){
+                        if (e.getCode() == 401) {
                             finish();
                         }
                     }
@@ -137,37 +162,37 @@ public class MyInfomationActivity extends BaseActivity {
                                     .load(Const.IMG_PRE + userBean.getProfile().getHeadimgurl())
                                     .into(ivAvatar);
                         }
-                        if (!TextUtils.isEmpty(userBean.getProfile().getNickname())){
+                        if (!TextUtils.isEmpty(userBean.getProfile().getNickname())) {
                             tvNickname.setText(userBean.getProfile().getNickname());
                         }
-                        if (!TextUtils.isEmpty(userBean.getProfile().getPhone())){
+                        if (!TextUtils.isEmpty(userBean.getProfile().getPhone())) {
                             tvPhone.setText(userBean.getProfile().getPhone());
                         }
-                        if (!TextUtils.isEmpty(userBean.getProfile().getAddress())){
+                        if (!TextUtils.isEmpty(userBean.getProfile().getAddress())) {
                             tvAddress.setText(userBean.getProfile().getAddress());
                         }
-                        if (!TextUtils.isEmpty(userBean.getProfile().getEmail())){
+                        if (!TextUtils.isEmpty(userBean.getProfile().getEmail())) {
                             tvEmail.setText(userBean.getProfile().getEmail());
                         }
                         //    0=未提交；1=待审核；2=已通过审核；9=审核不通过；
                         int zhizhaoStatus = userBean.getProfile().getLicense_pic_status();
-                        if (zhizhaoStatus==0){
+                        if (zhizhaoStatus == 0) {
                             tvYingye.setText("未提交");
-                        }else if (zhizhaoStatus==1){
+                        } else if (zhizhaoStatus == 1) {
                             tvYingye.setText("待审核");
-                        }else if (zhizhaoStatus==2){
+                        } else if (zhizhaoStatus == 2) {
                             tvYingye.setText("已通过审核");
-                        }else if (zhizhaoStatus==9){
+                        } else if (zhizhaoStatus == 9) {
                             tvYingye.setText("审核不通过");
                         }
                         int farenStatus = userBean.getProfile().getLegal_pic_status();
-                        if (farenStatus==0){
+                        if (farenStatus == 0) {
                             tvFaren.setText("未提交");
-                        }else if (farenStatus==1){
+                        } else if (farenStatus == 1) {
                             tvFaren.setText("待审核");
-                        }else if (farenStatus==2){
+                        } else if (farenStatus == 2) {
                             tvFaren.setText("已通过审核");
-                        }else if (farenStatus==9){
+                        } else if (farenStatus == 9) {
                             tvFaren.setText("审核不通过");
                         }
 
@@ -185,29 +210,29 @@ public class MyInfomationActivity extends BaseActivity {
         return topBar;
     }
 
-    @OnClick({R.id.rl_logo, R.id.rl_nickname, R.id.rl_email, R.id.rl_address, R.id.rl_phone, R.id.rl_zhizhao, R.id.rl_faren})
+    @OnClick({R.id.rl_logo, R.id.rl_nickname, R.id.rl_email, R.id.rl_address, R.id.rl_phone, R.id.rl_zhizhao, R.id.rl_faren, R.id.rl_city})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_logo:
                 uploadHeadImage();
                 break;
             case R.id.rl_nickname:
-                startActivityForResult(new Intent(this,ModifyNicknameActivity.class),2);
+                startActivityForResult(new Intent(this, ModifyNicknameActivity.class), 2);
                 break;
             case R.id.rl_phone:
-                Intent intent = new Intent(this,ModifyPhoneActivity.class);
-                intent.putExtra("value",tvPhone.getText().toString());
-                startActivityForResult(intent,3);
+                Intent intent = new Intent(this, ModifyPhoneActivity.class);
+                intent.putExtra("value", tvPhone.getText().toString());
+                startActivityForResult(intent, 3);
                 break;
             case R.id.rl_address:
-                Intent intent1 = new Intent(this,ModifyAddressActivity.class);
-                intent1.putExtra("value",tvAddress.getText().toString());
-                startActivityForResult(intent1,4);
+                Intent intent1 = new Intent(this, ModifyAddressActivity.class);
+                intent1.putExtra("value", tvAddress.getText().toString());
+                startActivityForResult(intent1, 4);
                 break;
             case R.id.rl_email:
-                Intent intent2 = new Intent(this,ModifyEmailActivity.class);
-                intent2.putExtra("value",tvEmail.getText().toString());
-                startActivityForResult(intent2,5);
+                Intent intent2 = new Intent(this, ModifyEmailActivity.class);
+                intent2.putExtra("value", tvEmail.getText().toString());
+                startActivityForResult(intent2, 5);
                 break;
             case R.id.rl_zhizhao:
                 //跳转到调用系统图库
@@ -219,16 +244,73 @@ public class MyInfomationActivity extends BaseActivity {
                 Intent intent5 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(Intent.createChooser(intent5, "请选择图片"), REQUEST_FAREN);
                 break;
+            case R.id.rl_city:
+                onOptionPicker();
+                break;
         }
     }
 
 
+    public void onOptionPicker() {
+        if (cityList != null) {
+            List<String> list = new ArrayList<>();
+            for (int i = 0; i < cityList.size(); i++) {
+                if (cityList.get(i)!=null&&cityList.get(i).getRegion_name()!=null){
+                    list.add(cityList.get(i).getRegion_name());
+                }
+            }
+            OptionPicker picker = new OptionPicker(this, list);
+            picker.setCanceledOnTouchOutside(false);
+            picker.setDividerRatio(WheelView.DividerConfig.FILL);
+            picker.setShadowColor(Color.RED, 40);
+            picker.setSelectedIndex(1);
+            picker.setCycleDisable(true);
+            picker.setTextSize(11);
+            picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+                @Override
+                public void onOptionPicked(int index, String item) {
+                    tvCity.setText(item);
+                    uploadCity(item);
+                }
+            });
+            picker.show();
+        } else {
+            Toast.makeText(this, "获取城市列表势失败", Toast.LENGTH_SHORT).show();
+        }
 
-    @Subscribe
-    public void onNicknameEdited(EventModifyNickname eventModifyNickname){
-        tvNickname.setText(eventModifyNickname.nickname);
     }
 
+    private void uploadCity(String cityname) {
+        int cityId=0;
+        for (int i = 0; i <cityList.size() ; i++) {
+            if (cityList.get(i)!=null&&cityname.equals(cityList.get(i).getRegion_name())){
+                cityId = cityList.get(i).getCity_id();
+            }
+        }
+        final int finalCityId = cityId;
+        HttpManager.post(HttpManager.EDIT_USERINFO)
+                .params("token", SettingManager.getInstance().getToken())
+                .params("city_id",String.valueOf(cityId))
+                .execute(new SimpleCallBack<UserInfoBean>() {
+                    @Override
+                    public void onError(ApiException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getBaseContext(), "修改城市失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccess(UserInfoBean userInfoBean) {
+                        Toast.makeText(getBaseContext(), "修改城市成功", Toast.LENGTH_SHORT).show();
+                        SettingManager.getInstance().setCityId(String.valueOf(finalCityId));
+                    }
+                });
+    }
+
+
+    @Subscribe
+    public void onNicknameEdited(EventModifyNickname eventModifyNickname) {
+        tvNickname.setText(eventModifyNickname.nickname);
+    }
 
 
     /**
@@ -386,7 +468,7 @@ public class MyInfomationActivity extends BaseActivity {
                     String cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
                     zhizhaoFile = new File(cropImagePath);
                     HttpManager.post(HttpManager.EDIT_USERINFO)
-                            .params("token",SettingManager.getInstance().getToken())
+                            .params("token", SettingManager.getInstance().getToken())
                             .params("license_pic", zhizhaoFile, new ProgressResponseCallBack() {
                                 @Override
                                 public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
@@ -401,7 +483,7 @@ public class MyInfomationActivity extends BaseActivity {
 
                                 @Override
                                 public void onSuccess(UserInfoBean userInfoBean) {
-                                    Toast.makeText(getBaseContext(),"提交审核",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getBaseContext(), "提交审核", Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
@@ -412,7 +494,7 @@ public class MyInfomationActivity extends BaseActivity {
                     String cropImagePath = getRealFilePathFromUri(getApplicationContext(), uri);
                     farenFile = new File(cropImagePath);
                     HttpManager.post(HttpManager.EDIT_USERINFO)
-                            .params("token",SettingManager.getInstance().getToken())
+                            .params("token", SettingManager.getInstance().getToken())
                             .params("legal_pic", farenFile, new ProgressResponseCallBack() {
                                 @Override
                                 public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
@@ -427,7 +509,7 @@ public class MyInfomationActivity extends BaseActivity {
 
                                 @Override
                                 public void onSuccess(UserInfoBean userInfoBean) {
-                                    Toast.makeText(getBaseContext(),"提交审核",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getBaseContext(), "提交审核", Toast.LENGTH_SHORT).show();
                                 }
                             });
                 }
@@ -437,33 +519,34 @@ public class MyInfomationActivity extends BaseActivity {
 
     private File zhizhaoFile;
     private File farenFile;
+
     private void doUpload(String file) {
         File imageFile = new File(file);//将要保存图片的路径
         HttpManager.post(HttpManager.EDIT_USERINFO)
-                .params("token",SettingManager.getInstance().getToken())
+                .params("token", SettingManager.getInstance().getToken())
                 .params("headimgurl", imageFile, new ProgressResponseCallBack() {
                     @Override
                     public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
 
                     }
                 })
-        .execute(new SimpleCallBack<UserInfoBean>() {
-            @Override
-            public void onError(ApiException e) {
+                .execute(new SimpleCallBack<UserInfoBean>() {
+                    @Override
+                    public void onError(ApiException e) {
 
-            }
+                    }
 
-            @Override
-            public void onSuccess(UserInfoBean userInfoBean) {
-                SettingManager.getInstance().setAvatar(userInfoBean.getProfile().getHeadimgurl());
-                Glide.with(getBaseContext())
-                        .load(Const.IMG_PRE+userInfoBean.getProfile().getHeadimgurl())
-                        .into(ivAvatar);
-                EventModifyAvatar eventModifyAvatar = new EventModifyAvatar();
-                eventModifyAvatar.avatar = userInfoBean.getProfile().getHeadimgurl();
-                EventBus.getDefault().post(eventModifyAvatar);
-            }
-        });
+                    @Override
+                    public void onSuccess(UserInfoBean userInfoBean) {
+                        SettingManager.getInstance().setAvatar(userInfoBean.getProfile().getHeadimgurl());
+                        Glide.with(getBaseContext())
+                                .load(Const.IMG_PRE + userInfoBean.getProfile().getHeadimgurl())
+                                .into(ivAvatar);
+                        EventModifyAvatar eventModifyAvatar = new EventModifyAvatar();
+                        eventModifyAvatar.avatar = userInfoBean.getProfile().getHeadimgurl();
+                        EventBus.getDefault().post(eventModifyAvatar);
+                    }
+                });
     }
 
     @Override

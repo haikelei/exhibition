@@ -49,6 +49,7 @@ import luyuan.com.exhibition.ui.adapter.MutipleItem;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.utils.FileUtil;
 import luyuan.com.exhibition.utils.SettingManager;
+import me.leefeng.promptlibrary.PromptDialog;
 
 import static luyuan.com.exhibition.utils.FileUtil.getRealFilePathFromUri;
 
@@ -82,6 +83,7 @@ public class MyPageActivity extends BaseActivity {
     private static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 104;
     //调用照相机返回图片文件
     private File tempFile;
+    private PromptDialog promptDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,6 +108,7 @@ public class MyPageActivity extends BaseActivity {
                 }
             }
         });
+        promptDialog = new PromptDialog(this);
     }
 
     /**
@@ -256,10 +259,11 @@ public class MyPageActivity extends BaseActivity {
     }
 
     private void save() {
+        promptDialog.showLoading("上传中");
         HttpManager.post(HttpManager.EDIT_MYPAGE)
                 .params("token", SettingManager.getInstance().getToken())
                 .params("content",et.getText().toString().trim())
-                .addFileParams("image", uploadList, new ProgressResponseCallBack() {
+                .addFileParams("image[]", uploadList, new ProgressResponseCallBack() {
                     @Override
                     public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
 
@@ -268,11 +272,13 @@ public class MyPageActivity extends BaseActivity {
                 .execute(new SimpleCallBack<EditMyPageBean>() {
                     @Override
                     public void onError(ApiException e) {
+                        promptDialog.dismiss();
                         Toast.makeText(getBaseContext(),"修改失败",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onSuccess(EditMyPageBean editMyPageBean) {
+                        promptDialog.dismiss();
                         finish();
                     }
                 });

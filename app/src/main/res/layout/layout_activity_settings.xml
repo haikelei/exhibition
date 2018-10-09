@@ -70,10 +70,38 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_marginTop="1dp"
+        android:id="@+id/rl_city"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/rl_nickname">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="城市"
+            android:textColor="#333333" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="32dp"
+            android:drawablePadding="5dp"
+            android:drawableRight="@mipmap/icon_back_gray" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
         android:id="@+id/rl_not_nessary"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_below="@id/rl_nickname"
+        android:layout_below="@id/rl_city"
         android:layout_marginTop="25dp">
 
         <TextView

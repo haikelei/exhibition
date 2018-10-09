@@ -140,6 +140,7 @@ public class LoginYanZhengMaActivity extends BaseActivity {
                         SettingManager.getInstance().setNickname(loginBean.getProfile().getNickname());
                         SettingManager.getInstance().setToken(loginBean.getToken());
                         SettingManager.getInstance().setAccount(loginBean.getTelno());
+                        SettingManager.getInstance().setCityId(loginBean.getProfile().city_id);
                         EventBus.getDefault().post(loginBean);
                         LoginBean.AppChatBean chatBean = loginBean.getApp_chat();
 

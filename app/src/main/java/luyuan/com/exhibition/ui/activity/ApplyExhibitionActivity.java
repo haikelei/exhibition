@@ -57,6 +57,7 @@ import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.utils.Const;
 import luyuan.com.exhibition.utils.FileUtil;
 import luyuan.com.exhibition.utils.SettingManager;
+import me.leefeng.promptlibrary.PromptDialog;
 
 import static luyuan.com.exhibition.utils.FileUtil.getRealFilePathFromUri;
 
@@ -134,6 +135,7 @@ public class ApplyExhibitionActivity extends BaseActivity {
                 }
             }
         });
+        promptDialog = new PromptDialog(this);
     }
 
     /**
@@ -320,10 +322,13 @@ public class ApplyExhibitionActivity extends BaseActivity {
         }
     }
 
+    private PromptDialog promptDialog;
     private void apply() {
+        promptDialog.showLoading("申请中");
         HttpManager.post(HttpManager.APPLY_BOOTH)
                 .params("token", SettingManager.getInstance().getToken())
                 .params("trade_id",String.valueOf(mSecondTradeId))
+                .params("city_id",SettingManager.getInstance().getCityId())
                 .params("image",uploadList.get(0),new ProgressResponseCallBack() {
                     @Override
                     public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {
@@ -333,12 +338,14 @@ public class ApplyExhibitionActivity extends BaseActivity {
                 .execute(new SimpleCallBack<UserInfoBean>() {
                     @Override
                     public void onError(ApiException e) {
+                        promptDialog.dismiss();
                         e.printStackTrace();
                         Toast.makeText(getBaseContext(),"申请失败",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onSuccess(UserInfoBean userInfoBean) {
+                        promptDialog.dismiss();
                         Toast.makeText(ApplyExhibitionActivity.this,"申请成功",Toast.LENGTH_LONG).show();
                         finish();
                     }
@@ -378,7 +385,7 @@ public class ApplyExhibitionActivity extends BaseActivity {
         picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
             @Override
             public void onOptionPicked(int index, String item) {
-                mSecondTradeId = firstList.get(index).getTrade_id();
+                mSecondTradeId = secondList.get(index).getTrade_id();
                 tv1.setText(secondList.get(index).getName());
             }
         });
