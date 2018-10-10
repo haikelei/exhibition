@@ -226,7 +226,7 @@ public class MyInfomationActivity extends BaseActivity {
                 break;
             case R.id.rl_phone:
                 Intent intent = new Intent(this, ModifyPhoneActivity.class);
-                intent.putExtra("value", tvPhone.getText().toString());
+                intent.putExtra("value", tvEmail.getText().toString());
                 startActivityForResult(intent, 3);
                 break;
             case R.id.rl_address:
@@ -236,7 +236,7 @@ public class MyInfomationActivity extends BaseActivity {
                 break;
             case R.id.rl_email:
                 Intent intent2 = new Intent(this, ModifyEmailActivity.class);
-                intent2.putExtra("value", tvEmail.getText().toString());
+                intent2.putExtra("value", tvPhone.getText().toString());
                 startActivityForResult(intent2, 5);
                 break;
             case R.id.rl_zhizhao:

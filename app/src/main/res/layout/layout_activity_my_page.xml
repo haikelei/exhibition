@@ -14,12 +14,12 @@
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:hint="请输入公司介绍"
-        android:background="@drawable/bg_text_item_border"
+        android:background="@drawable/bg_text_item_border_round"
         android:gravity="top"
         android:layout_marginTop="25dp"
         android:layout_height="wrap_content"
         android:minLines="8"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_width="match_parent" />
     <TextView
         android:id="@+id/tv_confirm"

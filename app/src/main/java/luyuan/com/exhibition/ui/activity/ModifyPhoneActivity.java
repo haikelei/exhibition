@@ -38,7 +38,7 @@ public class ModifyPhoneActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_activity_modify_nickname);
+        setContentView(R.layout.layout_activity_modify_common);
         ButterKnife.bind(this);
         initView();
     }

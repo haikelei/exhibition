@@ -17,7 +17,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="手机号码"
-            android:textColor="#333333" />
+            android:textSize="14sp"
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_phone"
@@ -25,8 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
+            android:textColor="#999999"
             android:drawableRight="@mipmap/icon_back_gray"
             />
     </RelativeLayout>
@@ -44,7 +46,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="修改密码"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_yingye"
@@ -52,8 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
+            android:textColor="#999999"
             android:drawableRight="@mipmap/icon_back_gray"
              />
     </RelativeLayout>

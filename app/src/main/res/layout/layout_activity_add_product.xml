@@ -14,6 +14,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:paddingLeft="3dp"
+            android:textSize="13sp"
+            android:background="@drawable/bg_text_item_border_round"
             android:id="@+id/et_name"
             android:layout_marginLeft="15dp"
             android:hint="请输入产品名称"
@@ -33,13 +36,15 @@
         android:layout_below="@id/rv"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
         android:hint="请输入公司介绍"
-        android:background="@drawable/bg_text_item_border"
+        android:background="@drawable/bg_text_item_border_round"
         android:gravity="top"
         android:layout_marginTop="25dp"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:minLines="8"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_width="match_parent" />
     <TextView
         android:id="@+id/tv_confirm"

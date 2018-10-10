@@ -5,11 +5,13 @@
     android:background="#f6f6f6">
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/rl_nessary"
         android:layout_width="match_parent"
         android:layout_height="35dp">
 
         <TextView
+            android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -19,6 +21,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_logo"
         android:layout_width="match_parent"
@@ -31,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="LOGO"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <ImageView
             android:id="@+id/iv_avatar"
@@ -39,11 +42,11 @@
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
-            android:background="#330000" />
+            android:layout_marginRight="22dp" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_nickname"
         android:layout_width="match_parent"
@@ -56,7 +59,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="名称"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_nickname"
@@ -64,12 +67,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_city"
         android:layout_width="match_parent"
@@ -82,7 +86,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="城市"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_city"
@@ -90,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray" />
     </RelativeLayout>
@@ -98,6 +102,7 @@
 
 
     <RelativeLayout
+        android:background="#ffffff"
         android:id="@+id/rl_not_nessary"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -105,6 +110,7 @@
         android:layout_marginTop="25dp">
 
         <TextView
+            android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -114,6 +120,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_email"
         android:layout_width="match_parent"
@@ -126,7 +133,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="联系电话"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_phone"
@@ -134,12 +141,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_address"
         android:layout_width="match_parent"
@@ -152,7 +160,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="地址"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_address"
@@ -160,12 +168,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_phone"
         android:layout_width="match_parent"
@@ -178,7 +187,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="邮箱"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_email"
@@ -186,13 +195,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray"
             android:text="55555@qq.com" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_zhizhao"
         android:layout_width="match_parent"
@@ -205,7 +215,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="营业执照认证"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_yingye"
@@ -213,13 +223,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray"
             android:text="未认证" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_faren"
         android:layout_width="match_parent"
@@ -232,7 +243,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
             android:text="法人证件认证"
-            android:textColor="#333333" />
+            android:textColor="#666666" />
 
         <TextView
             android:id="@+id/tv_faren"
@@ -240,7 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="22dp"
             android:drawablePadding="5dp"
             android:drawableRight="@mipmap/icon_back_gray"
             android:text="未认证" />
