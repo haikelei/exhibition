@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.youth.banner.loader.ImageLoader;
 
+import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.utils.Const;
 
 /**
@@ -21,9 +22,12 @@ public class GlideImageLoader extends ImageLoader {
 
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
+        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         Glide.with(context)
                 .load(Const.IMG_PRE+path)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .error(R.mipmap.no_image)
+                .placeholder(R.mipmap.no_image)
                 .into(imageView);
     }
 }

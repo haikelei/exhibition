@@ -174,6 +174,11 @@ public class MyInfomationActivity extends BaseActivity {
                         if (!TextUtils.isEmpty(userBean.getProfile().getEmail())) {
                             tvEmail.setText(userBean.getProfile().getEmail());
                         }
+                        if (userBean.getProfile().getCity_id()!=0) {
+                            tvCity.setText("已设置");
+                        }else {
+                            tvCity.setText("未设置");
+                        }
                         //    0=未提交；1=待审核；2=已通过审核；9=审核不通过；
                         int zhizhaoStatus = userBean.getProfile().getLicense_pic_status();
                         if (zhizhaoStatus == 0) {

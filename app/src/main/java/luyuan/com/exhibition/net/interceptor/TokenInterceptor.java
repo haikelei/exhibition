@@ -10,6 +10,7 @@ import com.zhouyou.http.model.ApiResult;
 import luyuan.com.exhibition.MyApplication;
 import luyuan.com.exhibition.net.Code;
 import luyuan.com.exhibition.ui.activity.LoginPasswordActivity;
+import luyuan.com.exhibition.utils.SettingManager;
 import okhttp3.Response;
 
 /**
@@ -40,6 +41,7 @@ public class TokenInterceptor extends BaseExpiredInterceptor {
         try {
             switch (apiResult.getCode()) {
                 case Code.TOKEN_INVAILD: //AccessToken错误或已过期
+                    SettingManager.getInstance().logout();
                     MyApplication.getAppContext().startActivity(new Intent(MyApplication.getAppContext(), LoginPasswordActivity.class));
                     Response response = chain.proceed(chain.request());
                     return response;

@@ -48,16 +48,22 @@
         </activity>
         <activity android:name=".ui.activity.CompanyListActivity"></activity>
         <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
-        <activity android:name=".ui.activity.MyPageActivity"></activity>
+        <activity android:name=".ui.activity.MyPageActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            ></activity>
         <activity android:name=".ui.activity.ApplyExhibitionActivity"></activity>
-        <activity android:name=".ui.activity.AddProductActivity"></activity>
+        <activity android:name=".ui.activity.AddProductActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            ></activity>
         <activity android:name=".ui.activity.SettingActivity"></activity>
         <activity android:name=".ui.activity.ManageProductActivity"></activity>
         <activity android:name=".ui.activity.MyInfomationActivity"></activity>
         <activity android:name=".ui.activity.LoginPasswordActivity"></activity>
         <activity android:name=".ui.activity.RegistActivity"></activity>
         <activity android:name=".ui.activity.LoginYanZhengMaActivity"></activity>
-        <activity android:name=".ui.activity.ModifyNicknameActivity"></activity>
+        <activity android:name=".ui.activity.ModifyNicknameActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            ></activity>
         <activity android:name=".ui.activity.ClipImageActivity"></activity>
         <activity android:name=".ui.activity.ProductDetailActivity"></activity>
         <activity android:name=".ui.activity.ChatActivity"></activity>
@@ -65,9 +71,15 @@
         <activity android:name=".ui.activity.VoiceCallActivity"></activity>
         <activity android:name=".ui.activity.ServiceCompanyActivity"></activity>
         <activity android:name=".ui.activity.ServiceExhibitionActivity"></activity>
-        <activity android:name=".ui.activity.ModifyAddressActivity"></activity>
-        <activity android:name=".ui.activity.ModifyPhoneActivity"></activity>
-        <activity android:name=".ui.activity.ModifyEmailActivity"></activity>
+        <activity android:name=".ui.activity.ModifyAddressActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            ></activity>
+        <activity android:name=".ui.activity.ModifyPhoneActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            ></activity>
+        <activity android:name=".ui.activity.ModifyEmailActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
+            ></activity>
         <activity android:name=".ui.activity.CategoryActivity"></activity>
         <!---->
          <!--设置环信应用的AppKey -->

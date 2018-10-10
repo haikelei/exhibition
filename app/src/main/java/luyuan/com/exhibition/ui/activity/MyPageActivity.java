@@ -262,7 +262,7 @@ public class MyPageActivity extends BaseActivity {
         promptDialog.showLoading("上传中");
         HttpManager.post(HttpManager.EDIT_MYPAGE)
                 .params("token", SettingManager.getInstance().getToken())
-                .params("content",et.getText().toString().trim())
+                .params("describe",et.getText().toString().trim())
                 .addFileParams("image[]", uploadList, new ProgressResponseCallBack() {
                     @Override
                     public void onResponseProgress(long bytesWritten, long contentLength, boolean done) {

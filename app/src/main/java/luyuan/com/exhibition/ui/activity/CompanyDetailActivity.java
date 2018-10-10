@@ -144,6 +144,9 @@ public class CompanyDetailActivity extends BaseActivity {
         for (int i = 0; i < tmpList.size(); i++) {
             list.add(tmpList.get(i).getImage_url());
         }
+        if (list.size()==0){
+            list.add("");
+        }
         banner.setImages(list);
         banner.setImageLoader(new GlideImageLoader())
                 .setDelayTime(5000)

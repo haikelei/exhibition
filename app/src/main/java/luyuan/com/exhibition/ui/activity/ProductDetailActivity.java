@@ -65,6 +65,9 @@ public class ProductDetailActivity extends BaseActivity {
                         for (int i = 0; i < productDetailBean.getThumbs().size(); i++) {
                             list.add(productDetailBean.getThumbs().get(i).getImage_url());
                         }
+                        if (list.size()==0){
+                            list.add("");
+                        }
                         banner.setImages(list).setImageLoader(new GlideImageLoader()).setDelayTime(5000).start();
                     }
                 });
