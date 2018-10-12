@@ -73,6 +73,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="gone"
         android:background="#ffffff"
         android:layout_marginTop="1dp"
         android:id="@+id/rl_city"

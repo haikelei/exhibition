@@ -66,12 +66,35 @@
             android:layout_height="match_parent" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_marginLeft="15dp"
+        android:background="#ffffff"
+        android:layout_marginTop="1dp"
+        android:id="@+id/rl_city"
+        android:layout_width="wrap_content"
+        android:paddingRight="20dp"
+        android:paddingLeft="10dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/rl_check_password">
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="请选择城市"
+            android:drawablePadding="25dp"
+            android:drawableRight="@mipmap/icon_back_down"
+            android:textColor="#666666" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/tv_login"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:layout_below="@id/rl_check_password"
+        android:layout_below="@id/rl_city"
         android:layout_centerHorizontal="true"
         android:textSize="15sp"
         android:background="#165ce8"

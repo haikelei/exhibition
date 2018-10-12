@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
@@ -98,12 +99,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
+        Glide.with(this)
+                .load("http://zh.online-sh.com/UpLoadFile/video/videoposter.png")
+                .into(mJzvdStd.thumbImageView);
         mJzvdStd.setUp(url, ""
                 , JzvdStd.SCREEN_WINDOW_NORMAL);
-//        Glide.with(this)
-//                .load(VideoConstant.videoThumbList[0])
-//                .into(mJzvdStd.thumbImageView);
+
 
         Jzvd.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         Jzvd.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;

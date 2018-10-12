@@ -32,7 +32,7 @@
             android:text="暂无介绍"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp"
-            android:textSize="9sp"
+            android:textSize="13sp"
             android:textColor="#666666"
             android:id="@+id/tv_content"
             android:layout_width="wrap_content"
