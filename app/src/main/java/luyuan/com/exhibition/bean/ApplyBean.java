@@ -5,6 +5,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import org.w3c.dom.ProcessingInstruction;
 
 import luyuan.com.exhibition.ui.adapter.MutipleItem;
+import luyuan.com.exhibition.utils.SettingManager;
 
 /**
  * @author: lujialei
@@ -37,6 +38,9 @@ public class ApplyBean implements MultiItemEntity {
     }
 
     private String path;
+
+    public String image_url;
+    public int banner_id;
 
     @Override
     public int getItemType() {

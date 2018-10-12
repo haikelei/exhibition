@@ -28,6 +28,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.zhouyou.http.body.ProgressResponseCallBack;
 import com.zhouyou.http.callback.SimpleCallBack;
@@ -39,14 +40,17 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 import luyuan.com.exhibition.BuildConfig;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.ApplyBean;
 import luyuan.com.exhibition.bean.EditMyPageBean;
+import luyuan.com.exhibition.bean.MyPageBean;
 import luyuan.com.exhibition.net.HttpManager;
 import luyuan.com.exhibition.ui.adapter.ApplyAdapter;
 import luyuan.com.exhibition.ui.adapter.MutipleItem;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
+import luyuan.com.exhibition.utils.Const;
 import luyuan.com.exhibition.utils.FileUtil;
 import luyuan.com.exhibition.utils.SettingManager;
 import me.leefeng.promptlibrary.PromptDialog;
@@ -68,7 +72,7 @@ public class MyPageActivity extends BaseActivity {
     TextView tvConfirm;
     @BindView(R.id.et)
     EditText et;
-    private ArrayList list;
+    private ArrayList<ApplyBean> list;
     private ApplyAdapter mAdapter;
 
     //请求相机
@@ -91,6 +95,7 @@ public class MyPageActivity extends BaseActivity {
         setContentView(R.layout.layout_activity_my_page);
         ButterKnife.bind(this);
         initView();
+        loadData();
     }
 
     private void initView() {
@@ -108,7 +113,87 @@ public class MyPageActivity extends BaseActivity {
                 }
             }
         });
+        mAdapter.setListener(new ApplyAdapter.Listener() {
+            @Override
+            public void onDelete(ApplyBean item) {
+                if (!TextUtils.isEmpty(item.getPath())){//本地图片
+                    uploadList.remove(item.getPath());
+                    int deleteIndex = -1;
+                    for (int i = 0; i < list.size(); i++) {
+                        if (!TextUtils.isEmpty(list.get(i).getPath())){
+                            if (item.getPath().equals(list.get(i).getPath())){
+                                deleteIndex = i;
+                            }
+                        }
+                    }
+                    if (deleteIndex!=-1){
+                        list.remove(deleteIndex);
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }else if (!TextUtils.isEmpty(item.image_url)){//网络图片
+                   deleteBanner(item);
+                }
+            }
+        });
+
         promptDialog = new PromptDialog(this);
+    }
+
+    private void deleteBanner(final ApplyBean item) {
+        promptDialog.showLoading("加载中...");
+        HttpManager.post(HttpManager.DELETE_BANNER)
+                .params("token",SettingManager.getInstance().getToken())
+                .params("banner_id",String.valueOf(item.banner_id))
+                .execute(new SimpleCallBack<String>() {
+                    @Override
+                    public void onError(ApiException e) {
+                        promptDialog.dismiss();
+                        Toasty.normal(getBaseContext(),"删除失败").show();
+                    }
+
+                    @Override
+                    public void onSuccess(String s) {
+                        promptDialog.dismiss();
+                        int deleteIndex = -1;
+                        for (int i = 0; i < list.size(); i++) {
+                            if (!TextUtils.isEmpty(list.get(i).image_url)){
+                                if (list.get(i).image_url.equals(item.image_url)){
+                                    deleteIndex = i;
+                                }
+                            }
+                        }
+                        if (deleteIndex!=-1){
+                            list.remove(deleteIndex);
+                            mAdapter.notifyDataSetChanged();
+                            Toasty.normal(getBaseContext(),"删除成功").show();
+                        }
+                    }
+                });
+
+    }
+
+    private void loadData() {
+        HttpManager.post(HttpManager.GET_MYPAGE)
+                .params("token",SettingManager.getInstance().getToken())
+                .execute(new SimpleCallBack<MyPageBean>() {
+                    @Override
+                    public void onError(ApiException e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(MyPageBean myPageBean) {
+                        ArrayList<MyPageBean.BannerListBean> tmpList = (ArrayList<MyPageBean.BannerListBean>) myPageBean.getBanner_list();
+                        for (int i = 0; i < tmpList.size(); i++) {
+                            ApplyBean bean = new ApplyBean(MutipleItem.IMG);
+                            bean.banner_id = tmpList.get(i).getBanner_id();
+                            bean.image_url = tmpList.get(i).getImage_url();
+                            list.add(0,bean);
+                        }
+                        mAdapter.notifyDataSetChanged();
+                        et.setText(myPageBean.getDescribe());
+                    }
+                });
     }
 
     /**

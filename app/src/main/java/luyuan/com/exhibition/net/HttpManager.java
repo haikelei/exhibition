@@ -98,6 +98,13 @@ public class HttpManager {
      *获取全部地区
      */
     public static final String GET_PROVINCES = "Overall/getRegions";
-
+    /**
+     *获取全部地区
+     */
+    public static final String GET_MYPAGE = "Homepage/getUserHomepage";
+    /**
+     *删除banner
+     */
+    public static final String DELETE_BANNER = "Homepage/deleteBanner";
 
 }

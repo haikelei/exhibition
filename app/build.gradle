@@ -40,6 +40,7 @@ dependencies {
     compile 'com.yanzhenjie:recyclerview-swipe:1.1.4'
     compile 'com.contrarywind:Android-PickerView:4.1.6'
     compile 'com.alibaba:fastjson:1.1.55.android'
+    implementation 'com.github.GrenderG:Toasty:1.3.0'
     //Optional compile for GCM (Google Cloud Messaging).
     //    compile ('com.google.android.gms:play-services-gcm:10.2.1'){
     //        exclude module: "support-v4"
