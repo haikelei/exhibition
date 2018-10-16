@@ -106,5 +106,9 @@ public class HttpManager {
      *删除banner
      */
     public static final String DELETE_BANNER = "Homepage/deleteBanner";
+    /**
+     *获取企业视频列表
+     */
+    public static final String GET_COM_VIDEO = "Company/getCompanyVideos";
 
 }

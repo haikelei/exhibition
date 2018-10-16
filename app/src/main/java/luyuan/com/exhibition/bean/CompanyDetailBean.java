@@ -18,6 +18,7 @@ public class CompanyDetailBean {
     private CompanyDetailsBean company_details;
     private List<BannerListBean> banner_list;
 
+
     public CompanyDetailsAppChat getCompany_details_app_chat() {
         return company_details_app_chat;
     }
@@ -42,6 +43,11 @@ public class CompanyDetailBean {
 
     public void setBanner_list(List<BannerListBean> banner_list) {
         this.banner_list = banner_list;
+    }
+
+    public static class AuthImageBean{
+        public String image_url;
+        public String exts;
     }
 
     public static class CompanyDetailsAppChat{
@@ -86,6 +92,7 @@ public class CompanyDetailBean {
         private String headimgurl;
         private String describe;
         private AppChatBean app_chat;
+        public AuthImageBean auth_image;
 
         public String getNickname() {
             return nickname;

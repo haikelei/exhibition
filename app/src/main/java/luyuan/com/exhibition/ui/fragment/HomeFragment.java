@@ -117,6 +117,11 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
     public void onHiddenChanged(boolean hidden) {
         if (hidden){
             Jzvd.releaseAllVideos();

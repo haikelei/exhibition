@@ -78,7 +78,7 @@ public class ChatActivity extends BaseActivity {
 
     private void initView() {
         ChatWrapperFragment chatFragment = new ChatWrapperFragment();
-//传入参数
+        //传入参数
         Bundle args = new Bundle();
         args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         args.putString(EaseConstant.EXTRA_USER_ID, username);

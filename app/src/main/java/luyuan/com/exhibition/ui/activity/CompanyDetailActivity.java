@@ -3,19 +3,18 @@ package luyuan.com.exhibition.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.hyphenate.easeui.EaseConstant;
 import com.youth.banner.Banner;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +24,11 @@ import butterknife.ButterKnife;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CompanyDetailBean;
 import luyuan.com.exhibition.bean.CompanyProductBean;
+import luyuan.com.exhibition.bean.VideoDetailBean;
 import luyuan.com.exhibition.net.HttpManager;
-import luyuan.com.exhibition.ui.adapter.ProductAdapter;
+import luyuan.com.exhibition.ui.adapter.VideoPagerAdapter;
+import luyuan.com.exhibition.ui.fragment.CustomChatWrapperFragment;
+import luyuan.com.exhibition.ui.fragment.VideoFragment;
 import luyuan.com.exhibition.ui.interfaces.GlideImageLoader;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.utils.Const;
@@ -44,20 +46,27 @@ import static luyuan.com.exhibition.ui.activity.ChatActivity.CHAT_USER_NAME;
 
 
 public class CompanyDetailActivity extends BaseActivity {
-    @BindView(R.id.banner)
-    Banner banner;
+
 
     public static final String BOOTH_ID = "booth_id";
-    @BindView(R.id.tv_company_name)
-    TextView tvCompanyName;
-    @BindView(R.id.iv_head)
-    ImageView ivHead;
+
+    @BindView(R.id.rl_bottom_container)
+    RelativeLayout rlBottomContainer;
+    @BindView(R.id.iv_logo)
+    ImageView ivLogo;
     @BindView(R.id.tv_des)
     TextView tvDes;
-    @BindView(R.id.rv)
-    RecyclerView rv;
+    @BindView(R.id.iv_renzheng)
+    ImageView ivRenzheng;
+    @BindView(R.id.banner_canzhan)
+    Banner bannerCanzhan;
+    @BindView(R.id.banner_products)
+    Banner bannerProducts;
+    @BindView(R.id.vp_video)
+    ViewPager vp;
+    VideoPagerAdapter mVideoPagerAdapter;
+
     private int boothId;
-    private ProductAdapter mAdapter;
     private CompanyDetailBean.CompanyDetailsBean.AppChatBean chatBean;
 
     @Override
@@ -82,11 +91,11 @@ public class CompanyDetailActivity extends BaseActivity {
         topBar.setOnTopBarClickListener(new DefaultTopBar.OnTopBarClickListener() {
             @Override
             public void onChatClick(View v) {
-                if (chatBean!=null){
+                if (chatBean != null) {
                     Intent intent = new Intent(getBaseContext(), ChatActivity.class);
-                    intent.putExtra(CHAT_PASSWORD,chatBean.getHx_password());
-                    intent.putExtra(CHAT_USER_NAME,chatBean.getHx_username());
-                    intent.putExtra(CHAT_STATUS,chatBean.getStatus());
+                    intent.putExtra(CHAT_PASSWORD, chatBean.getHx_password());
+                    intent.putExtra(CHAT_USER_NAME, chatBean.getHx_username());
+                    intent.putExtra(CHAT_STATUS, chatBean.getStatus());
                     startActivity(intent);
                 }
             }
@@ -106,12 +115,8 @@ public class CompanyDetailActivity extends BaseActivity {
                     @Override
                     public void onSuccess(CompanyDetailBean companyDetailBean) {
                         chatBean = companyDetailBean.getCompany_details().getApp_chat();
-                        initBanner(companyDetailBean.getBanner_list());
-                        tvCompanyName.setText(companyDetailBean.getCompany_details().getNickname());
-                        tvDes.setText(companyDetailBean.getCompany_details().getDescribe());
-                        Glide.with(CompanyDetailActivity.this)
-                                .load(Const.IMG_PRE + companyDetailBean.getCompany_details().getHeadimgurl())
-                                .into(ivHead);
+                        handleCompanyDetail(companyDetailBean);
+                        initChatFragment(companyDetailBean);
                     }
                 });
         HttpManager.post(HttpManager.COMPANY_PRODUCTS)
@@ -124,37 +129,67 @@ public class CompanyDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(final List<CompanyProductBean> companyProductBeans) {
-                        mAdapter = new ProductAdapter(companyProductBeans);
-                        rv.setAdapter(mAdapter);
-                        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                int id = companyProductBeans.get(position).getProducts_id();
-                                Intent intent = new Intent(getBaseContext(),ProductDetailActivity.class);
-                                intent.putExtra(ProductDetailActivity.PRODUCT_ID,id);
-                                startActivity(intent);
-                            }
-                        });
+                        ArrayList list = new ArrayList();
+                        for (int i = 0; i < companyProductBeans.size(); i++) {
+                            list.add(companyProductBeans.get(i).getThumb());
+                        }
+                        bannerProducts.setImages(list).setImageLoader(new GlideImageLoader()).setDelayTime(5000).start();
+                    }
+                });
+        HttpManager.post(HttpManager.GET_COM_VIDEO)
+                .params("booth_id", String.valueOf(boothId))
+                .execute(new SimpleCallBack<List<VideoDetailBean>>() {
+                    @Override
+                    public void onError(ApiException e) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(List<VideoDetailBean> list) {
+                        ArrayList tmpList = new ArrayList();
+                        for (int i = 0; i < list.size(); i++) {
+                            VideoFragment videoFragment = VideoFragment.getInstance(list.get(i));
+                            tmpList.add(videoFragment);
+                        }
+                        mVideoPagerAdapter = new VideoPagerAdapter(getSupportFragmentManager(),tmpList);
+                        vp.setOffscreenPageLimit(0);
+                        vp.setAdapter(mVideoPagerAdapter);
                     }
                 });
     }
 
-    private void initBanner(List<CompanyDetailBean.BannerListBean> tmpList) {
+    private void handleCompanyDetail(CompanyDetailBean companyDetailBean) {
+        Glide.with(this)
+                .load(Const.IMG_PRE + companyDetailBean.getCompany_details().getHeadimgurl())
+                .into(ivLogo);
+        tvDes.setText(companyDetailBean.getCompany_details().getDescribe());
+        Glide.with(this)
+                .load(Const.IMG_PRE + companyDetailBean.getCompany_details().auth_image.image_url)
+                .into(ivRenzheng);
+        ArrayList list = getBannerList(companyDetailBean);
+        bannerCanzhan.setImages(list).setImageLoader(new GlideImageLoader()).setDelayTime(5000).start();
+    }
+
+    private ArrayList getBannerList(CompanyDetailBean companyDetailBean) {
         ArrayList list = new ArrayList();
-        for (int i = 0; i < tmpList.size(); i++) {
-            list.add(tmpList.get(i).getImage_url());
+        for (int i = 0; i < companyDetailBean.getBanner_list().size(); i++) {
+            list.add(companyDetailBean.getBanner_list().get(i).getImage_url());
         }
-        if (list.size()==0){
-            list.add("");
-        }
-        banner.setImages(list);
-        banner.setImageLoader(new GlideImageLoader())
-                .setDelayTime(5000)
-                .start();
+        return list;
+    }
+
+    private void initChatFragment(CompanyDetailBean companyDetailBean) {
+        CustomChatWrapperFragment chatFragment = new CustomChatWrapperFragment();
+        //传入参数
+        Bundle args = new Bundle();
+        args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
+        args.putString(EaseConstant.EXTRA_USER_ID, companyDetailBean.getCompany_details().getApp_chat().getHx_username());
+        chatFragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction().add(R.id.rl_bottom_container, chatFragment).commit();
     }
 
 
     private void initView() {
-        rv.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }
