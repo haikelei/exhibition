@@ -15,6 +15,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -37,8 +38,8 @@ import luyuan.com.exhibition.bean.CityBean;
 import luyuan.com.exhibition.bean.CompanyListBean;
 import luyuan.com.exhibition.bean.param.GetCompanyParam;
 import luyuan.com.exhibition.net.HttpManager;
+import luyuan.com.exhibition.ui.adapter.CategoryLeftAdapter;
 import luyuan.com.exhibition.ui.adapter.CompanyListAdapter;
-import luyuan.com.exhibition.ui.adapter.DownRightAdapter;
 import luyuan.com.exhibition.ui.widget.DownLeftRecyclerView;
 import luyuan.com.exhibition.ui.widget.DownRightRecyclerView;
 import luyuan.com.exhibition.ui.widget.DownSelectView;
@@ -65,6 +66,8 @@ public class CompanyListActivity extends BaseActivity {
     RelativeLayout contaier;
     @BindView(R.id.rv_content)
     RecyclerView rvContent;
+    @BindView(R.id.rv_left)
+    RecyclerView rvLeft;
     private DownLeftRecyclerView left;
     private DownRightRecyclerView right;
     public final static String CATEGORY_BEAN = "category";
@@ -82,13 +85,13 @@ public class CompanyListActivity extends BaseActivity {
                 addList = ge.getFromLocation(data[0], data[1], 1);
                 if (addList != null && addList.get(0) != null) {
                     String mCity = addList.get(0).getLocality();
-                    if (mCity==null){
+                    if (mCity == null) {
                         return;
                     }
                     if (mCity != null && cityList != null) {
                         for (int i = 0; i < cityList.size(); i++) {
                             String city = cityList.get(i).getRegion_name();
-                            if (city!=null&&mCity!=null&&mCity.contains(city)) {
+                            if (city != null && mCity != null && mCity.contains(city)) {
                                 downViewLeft.setText(city);
                             }
                         }
@@ -102,6 +105,7 @@ public class CompanyListActivity extends BaseActivity {
     private LocationManager locationManager;
     private double latitude;
     private double longitude;
+    private CategoryLeftAdapter leftAdapter;
 
 
     @Override
@@ -116,6 +120,8 @@ public class CompanyListActivity extends BaseActivity {
     }
 
     private List<CategoryBean> categorysList;
+    private List<CategoryBean> leftCategorysList;
+
     private void loadCategorys() {
         HttpManager.post("Trade/getCategoryTree")
                 .execute(new SimpleCallBack<List<CategoryBean>>() {
@@ -130,7 +136,7 @@ public class CompanyListActivity extends BaseActivity {
                         ArrayList list = new ArrayList();
                         for (int i = 0; i < categoryBeans.size(); i++) {
                             List<CategoryBean> list1 = categoryBeans.get(i).getChildren();
-                            if (list1!=null){
+                            if (list1 != null) {
                                 list.addAll(list1);
                             }
 
@@ -145,13 +151,13 @@ public class CompanyListActivity extends BaseActivity {
         if (categoryBean != null) {
             param.trade_id = categoryBean.getTrade_id();
         }
-        if (!TextUtils.isEmpty(downViewLeft.getCity())){
+        if (!TextUtils.isEmpty(downViewLeft.getCity())) {
             String city = downViewLeft.getCity();
             for (int i = 0; i < cityList.size(); i++) {
-                if (cityList.get(i)!=null){
+                if (cityList.get(i) != null) {
                     String listCity = cityList.get(i).getRegion_name();
-                    if (city!=null&& listCity!=null){
-                        if (city.contains(listCity) || listCity.contains(city) ){
+                    if (city != null && listCity != null) {
+                        if (city.contains(listCity) || listCity.contains(city)) {
                             param.city_id = cityList.get(i).getCity_id();
                         }
                     }
@@ -173,8 +179,8 @@ public class CompanyListActivity extends BaseActivity {
                         mContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                                Intent intent = new Intent(view.getContext(),CompanyDetailActivity.class);
-                                intent.putExtra(BOOTH_ID,cityListBeans.get(position).getBooth_id());
+                                Intent intent = new Intent(view.getContext(), CompanyDetailActivity.class);
+                                intent.putExtra(BOOTH_ID, cityListBeans.get(position).getBooth_id());
                                 startActivity(intent);
                             }
                         });
@@ -186,8 +192,18 @@ public class CompanyListActivity extends BaseActivity {
         if (categoryBean != null) {
             downViewRight.setText(categoryBean.getName());
         }
-        rvContent.setLayoutManager(new GridLayoutManager(this,4));
+        rvContent.setLayoutManager(new GridLayoutManager(this, 4));
 
+        rvLeft.setLayoutManager(new LinearLayoutManager(this));
+        leftCategorysList = new ArrayList<>();
+        leftAdapter = new CategoryLeftAdapter(leftCategorysList);
+        rvLeft.setAdapter(leftAdapter);
+        leftAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                categoryBean = leftCategorysList.get(position);
+            }
+        });
     }
 
     private void loadData() {
@@ -294,7 +310,7 @@ public class CompanyListActivity extends BaseActivity {
                 if (right == null) {
                     right = new DownRightRecyclerView(this);
                     right.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
-                    if (categorysList!=null){
+                    if (categorysList != null) {
                         right.setData(categorysList);
                     }
                     right.setOnRightItemClickListener(new DownRightRecyclerView.OnRightItemClickListener() {
@@ -305,6 +321,19 @@ public class CompanyListActivity extends BaseActivity {
                             downViewRight.setText(bean.getName());
                             right.setVisibility(View.GONE);
                             loadCompany();
+
+
+//                            寻找所有二级分类下的子分类
+                            ArrayList list = new ArrayList();
+                            for (int i = 0; i < categorysList.size(); i++) {
+                                List<CategoryBean> list1 = categorysList.get(i).getChildren();
+                                if (list1 != null) {
+                                    list.addAll(list1);
+                                }
+                            }
+                            leftCategorysList.clear();
+                            leftCategorysList.addAll(list);
+                            leftAdapter.notifyDataSetChanged();
                         }
                     });
                     Rect rect2 = new Rect();

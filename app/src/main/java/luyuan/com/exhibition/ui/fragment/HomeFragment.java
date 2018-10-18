@@ -29,6 +29,7 @@ import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CategoryBean;
 import luyuan.com.exhibition.net.HttpManager;
 import luyuan.com.exhibition.ui.activity.CategoryActivity;
+import luyuan.com.exhibition.ui.activity.CategoryTwoAvtivity;
 import luyuan.com.exhibition.ui.adapter.HomeAdapter;
 
 import static luyuan.com.exhibition.ui.activity.CategoryActivity.PARENT_ID;
@@ -93,7 +94,7 @@ public class HomeFragment extends Fragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getContext(), CategoryActivity.class);
+                Intent intent = new Intent(getContext(), CategoryTwoAvtivity.class);
                 intent.putExtra(PARENT_ID, list.get(position).getTrade_id());
                 startActivity(intent);
             }
