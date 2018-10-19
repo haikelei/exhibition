@@ -37,11 +37,13 @@
 </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_left"
+        android:visibility="gone"
         android:layout_below="@id/ll_top"
         android:layout_width="100dp"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 <android.support.v7.widget.RecyclerView
     android:id="@+id/rv_content"
+    android:layout_marginLeft="10dp"
     android:layout_toRightOf="@id/rv_left"
     android:layout_below="@id/ll_top"
     android:layout_width="match_parent"

@@ -201,7 +201,18 @@ public class CompanyListActivity extends BaseActivity {
         leftAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                for (int i = 0; i < leftCategorysList.size(); i++) {
+                    if (position==i){
+                        leftCategorysList.get(i).isChecked=true;
+                    }else {
+                        leftCategorysList.get(i).isChecked=false;
+                    }
+                }
+                leftAdapter.notifyDataSetChanged();
+
+
                 categoryBean = leftCategorysList.get(position);
+                loadCompany();
             }
         });
     }
@@ -333,6 +344,7 @@ public class CompanyListActivity extends BaseActivity {
                             }
                             leftCategorysList.clear();
                             leftCategorysList.addAll(list);
+                            rvLeft.setVisibility(leftCategorysList.size()==0?View.GONE:View.VISIBLE);
                             leftAdapter.notifyDataSetChanged();
                         }
                     });
