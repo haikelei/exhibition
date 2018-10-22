@@ -119,11 +119,12 @@ public class CompanyListActivity extends BaseActivity {
         loadCategorys();
     }
 
-    private List<CategoryBean> categorysList;
+    private List<CategoryBean> categorysList = new ArrayList<>();
     private List<CategoryBean> leftCategorysList;
 
     private void loadCategorys() {
         HttpManager.post("Trade/getCategoryTree")
+                .params("parent_id",String.valueOf(categoryBean.getParent_id()))
                 .execute(new SimpleCallBack<List<CategoryBean>>() {
                     @Override
                     public void onError(ApiException e) {
@@ -132,16 +133,41 @@ public class CompanyListActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(List<CategoryBean> categoryBeans) {
+                        leftCategorysList.addAll(categoryBeans);
+                        leftAdapter.notifyDataSetChanged();
 //                        寻找所有二级分类
-                        ArrayList list = new ArrayList();
-                        for (int i = 0; i < categoryBeans.size(); i++) {
-                            List<CategoryBean> list1 = categoryBeans.get(i).getChildren();
-                            if (list1 != null) {
-                                list.addAll(list1);
-                            }
-
-                        }
-                        categorysList = list;
+//                        ArrayList list = new ArrayList();
+//                        for (int i = 0; i < categoryBeans.size(); i++) {
+//                            List<CategoryBean> list1 = categoryBeans.get(i).getChildren();
+//                            if (list1 != null) {
+//                                list.addAll(list1);
+//                            }
+//                        }
+//                        leftCategorysList.addAll(categoryBeans);
+//                        leftAdapter.notifyDataSetChanged();
+//
+//                        right = new DownRightRecyclerView(getBaseContext());
+//                        right.setVisibility(View.GONE);
+//                        right.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
+//                        if (categorysList != null) {
+//                            right.setData(categorysList);
+//                        }
+//                        right.setOnRightItemClickListener(new DownRightRecyclerView.OnRightItemClickListener() {
+//                            @Override
+//                            public void onItemClick(int position) {
+//                                CategoryBean bean = categorysList.get(position);
+//                                categoryBean = bean;
+//                                downViewRight.setText(bean.getName());
+//                                right.setVisibility(View.GONE);
+//                                loadCompany();
+//                            }
+//                        });
+//                        Rect rect2 = new Rect();
+//                        downViewRight.getGlobalVisibleRect(rect2);
+//                        RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(rect2.width(), 800);
+//                        layoutParams2.leftMargin = rect2.left;
+//                        layoutParams2.topMargin = rect2.bottom - ScreenUtil.getStateBarHeight(getBaseContext());
+//                        contaier.addView(right, layoutParams2);
                     }
                 });
     }
@@ -209,10 +235,21 @@ public class CompanyListActivity extends BaseActivity {
                     }
                 }
                 leftAdapter.notifyDataSetChanged();
-
-
+                categorysList.clear();
                 categoryBean = leftCategorysList.get(position);
                 loadCompany();
+
+//                if (leftCategorysList.get(position).getChildren()!=null){
+//                    categorysList.addAll(leftCategorysList.get(position).getChildren());
+//                }
+//                if (categorysList.size()>0&&categorysList.get(0)!=null){
+//                    downViewRight.setText(categorysList.get(0).getName());
+//                    categoryBean = categorysList.get(0);
+//                    loadCompany();
+//                }else {
+//                    downViewRight.setText("");
+//                }
+
             }
         });
     }
@@ -319,42 +356,9 @@ public class CompanyListActivity extends BaseActivity {
                 break;
             case R.id.down_view_right:
                 if (right == null) {
-                    right = new DownRightRecyclerView(this);
-                    right.setBackgroundColor(getResources().getColor(R.color.c_f6f6f6));
-                    if (categorysList != null) {
-                        right.setData(categorysList);
-                    }
-                    right.setOnRightItemClickListener(new DownRightRecyclerView.OnRightItemClickListener() {
-                        @Override
-                        public void onItemClick(int position) {
-                            CategoryBean bean = categorysList.get(position);
-                            categoryBean = bean;
-                            downViewRight.setText(bean.getName());
-                            right.setVisibility(View.GONE);
-                            loadCompany();
 
-
-//                            寻找所有二级分类下的子分类
-                            ArrayList list = new ArrayList();
-                            for (int i = 0; i < categorysList.size(); i++) {
-                                List<CategoryBean> list1 = categorysList.get(i).getChildren();
-                                if (list1 != null) {
-                                    list.addAll(list1);
-                                }
-                            }
-                            leftCategorysList.clear();
-                            leftCategorysList.addAll(list);
-                            rvLeft.setVisibility(leftCategorysList.size()==0?View.GONE:View.VISIBLE);
-                            leftAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    Rect rect2 = new Rect();
-                    downViewRight.getGlobalVisibleRect(rect2);
-                    RelativeLayout.LayoutParams layoutParams2 = new RelativeLayout.LayoutParams(rect2.width(), 800);
-                    layoutParams2.leftMargin = rect2.left;
-                    layoutParams2.topMargin = rect2.bottom - ScreenUtil.getStateBarHeight(this);
-                    contaier.addView(right, layoutParams2);
                 } else {
+                    right.notifyData();
                     right.setVisibility(right.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
                 }
 

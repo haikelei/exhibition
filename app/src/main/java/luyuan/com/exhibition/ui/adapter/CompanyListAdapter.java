@@ -12,6 +12,7 @@ import java.util.List;
 import luyuan.com.exhibition.R;
 import luyuan.com.exhibition.bean.CompanyListBean;
 import luyuan.com.exhibition.utils.Const;
+import luyuan.com.exhibition.utils.GlideCircleTransform;
 
 /**
  * @author: lujialei
@@ -31,6 +32,7 @@ public class CompanyListAdapter extends BaseQuickAdapter<CompanyListBean,BaseVie
         ImageView imageView = helper.getView(R.id.iv);
         Glide.with(helper.itemView.getContext())
                 .load(Const.IMG_PRE+item.getHeadimgurl())
+                .transform(new GlideCircleTransform(helper.itemView.getContext()))
                 .into(imageView);
     }
 }

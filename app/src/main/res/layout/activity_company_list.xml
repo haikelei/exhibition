@@ -22,6 +22,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:visibility="invisible"
         android:padding="10dp"
         android:layout_weight="1"
         android:layout_width="0dp"
@@ -37,7 +38,6 @@
 </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_left"
-        android:visibility="gone"
         android:layout_below="@id/ll_top"
         android:layout_width="100dp"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>

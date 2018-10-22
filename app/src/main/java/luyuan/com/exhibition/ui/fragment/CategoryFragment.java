@@ -79,7 +79,11 @@ public class CategoryFragment extends Fragment {
                     public void onSuccess(List<CategoryBean> categoryBeans) {
                         leftList.addAll(categoryBeans);
                         mLeftAdapter.notifyDataSetChanged();
-
+                        for (int i = 0; i < leftList.size(); i++) {
+                            if (leftList.get(i).getTrade_id()==parentId){
+                                onSelected(i);
+                            }
+                        }
                     }
                 });
     }
@@ -134,5 +138,15 @@ public class CategoryFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private int parentId;
+    public void setSelectedId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    private void onSelected(int i) {
+        rvLeft.scrollToPosition(i);
+        mLeftAdapter.setOnItemClick(null,i);
     }
 }

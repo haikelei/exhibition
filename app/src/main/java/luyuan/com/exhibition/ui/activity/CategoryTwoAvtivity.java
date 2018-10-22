@@ -23,13 +23,17 @@ public class CategoryTwoAvtivity extends BaseActivity {
 
     @BindView(R.id.fl_container)
     FrameLayout flContainer;
+    public static final String PARENT_ID = "parent_id";
+    private int parentId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_two);
         ButterKnife.bind(this);
+        parentId = getIntent().getIntExtra(PARENT_ID,-1);
         CategoryFragment fragment = new CategoryFragment();
+        fragment.setSelectedId(parentId);
         getSupportFragmentManager().beginTransaction().add(R.id.fl_container,fragment).commit();
     }
 

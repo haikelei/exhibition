@@ -1,5 +1,6 @@
 package luyuan.com.exhibition.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,8 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hyphenate.easeui.EaseConstant;
 import com.youth.banner.Banner;
+import com.youth.banner.loader.ImageLoader;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
@@ -87,7 +90,6 @@ public class CompanyDetailActivity extends BaseActivity {
     @Override
     protected View onCreateTopBar(ViewGroup view) {
         DefaultTopBar topBar = new DefaultTopBar(this, "企业详情", true);
-        topBar.showChatView(true);
         topBar.setOnTopBarClickListener(new DefaultTopBar.OnTopBarClickListener() {
             @Override
             public void onChatClick(View v) {
@@ -133,7 +135,18 @@ public class CompanyDetailActivity extends BaseActivity {
                         for (int i = 0; i < companyProductBeans.size(); i++) {
                             list.add(companyProductBeans.get(i).getThumb());
                         }
-                        bannerProducts.setImages(list).setImageLoader(new GlideImageLoader()).setDelayTime(5000).start();
+                        bannerProducts.setImages(list).setImageLoader(new ImageLoader() {
+                            @Override
+                            public void displayImage(Context context, Object path, ImageView imageView) {
+                                Glide.with(context)
+                                        .load(Const.IMG_PRE+path)
+                                        .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                                        .error(R.mipmap.no_image)
+                                        .centerCrop()
+                                        .placeholder(R.mipmap.no_image)
+                                        .into(imageView);
+                            }
+                        }).setDelayTime(5000).start();
                     }
                 });
         HttpManager.post(HttpManager.GET_COM_VIDEO)
@@ -165,6 +178,7 @@ public class CompanyDetailActivity extends BaseActivity {
         tvDes.setText(companyDetailBean.getCompany_details().getDescribe());
         Glide.with(this)
                 .load(Const.IMG_PRE + companyDetailBean.getCompany_details().auth_image.image_url)
+                .centerCrop()
                 .into(ivRenzheng);
         ArrayList list = getBannerList(companyDetailBean);
         bannerCanzhan.setImages(list).setImageLoader(new GlideImageLoader()).setDelayTime(5000).start();

@@ -35,7 +35,6 @@ public class DownRightRecyclerView extends FrameLayout {
     RecyclerView rv;
     DownRightAdapter mAdapter;
 
-
     public DownRightRecyclerView(@NonNull Context context) {
         super(context);
         initView(context);
@@ -50,16 +49,24 @@ public class DownRightRecyclerView extends FrameLayout {
     }
 
     public void setData(List<CategoryBean> categorysList) {
-        mAdapter = new DownRightAdapter(categorysList);
-        rv.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                if (mListener!=null){
-                    mListener.onItemClick(position);
+        if (mAdapter==null){
+            mAdapter = new DownRightAdapter(categorysList);
+            rv.setAdapter(mAdapter);
+            mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    if (mListener!=null){
+                        mListener.onItemClick(position);
+                    }
                 }
-            }
-        });
+            });
+        }
+    }
+
+    public void notifyData(){
+        if (mAdapter!=null){
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     public interface OnRightItemClickListener{

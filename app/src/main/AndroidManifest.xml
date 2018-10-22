@@ -39,7 +39,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +49,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.CompanyListActivity"></activity>
-        <activity android:name=".ui.activity.CompanyDetailActivity"></activity>
+        <activity android:name=".ui.activity.CompanyDetailActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity android:name=".ui.activity.MyPageActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             ></activity>

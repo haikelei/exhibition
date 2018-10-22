@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:background="#ffffff"
         android:id="@+id/rl0"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
                 android:layout_gravity="center"
                 android:textColor="@color/c_165ce8"
                 android:text="参展企业简介"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -27,15 +28,18 @@
 
         </LinearLayout>
         <TextView
+            android:background="@drawable/bg_text_item_border"
             android:id="@+id/tv_des"
             android:layout_marginRight="20dp"
-            android:text="        这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介"
+            android:text="这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介这是企业简介"
             android:textColor="@color/c_165ce8"
             android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:padding="10dp"
+            android:layout_width="200dp"
+            android:layout_height="90dp" />
     </LinearLayout>
     <LinearLayout
+        android:background="#ffffff"
         android:orientation="horizontal"
         android:layout_marginTop="5dp"
         android:layout_below="@id/rl0"
@@ -48,6 +52,7 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:scaleType="centerCrop"
                 android:id="@+id/iv_renzheng"
                 android:layout_gravity="center"
                 android:layout_width="80dp"
@@ -72,6 +77,8 @@
                 android:layout_height="wrap_content" />
             <!--视频区域-->
             <android.support.v4.view.ViewPager
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:id="@+id/vp_video"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -81,12 +88,13 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="1dp"
+        android:background="#ffffff"
+        android:layout_marginTop="2dp"
         android:orientation="horizontal"
         android:layout_below="@id/rl1"
         android:id="@+id/rl2"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="120dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="100dp"
@@ -96,7 +104,7 @@
                 android:id="@+id/banner_canzhan"
                 android:layout_gravity="center"
                 android:layout_width="80dp"
-                android:layout_height="60dp" />
+                android:layout_height="100dp" />
             <TextView
                 android:layout_gravity="center"
                 android:text="我的参展相册"
@@ -117,6 +125,8 @@
                 android:layout_height="wrap_content" />
             <!--banner区域-->
             <com.youth.banner.Banner
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/banner_products"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
@@ -130,7 +140,7 @@
         android:id="@+id/rl_bottom_container"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="160dp">
 
     </RelativeLayout>
 </RelativeLayout>
