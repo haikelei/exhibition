@@ -137,10 +137,11 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/rl2"
         android:id="@+id/rl_bottom_container"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="match_parent">
 
     </RelativeLayout>
 </RelativeLayout>

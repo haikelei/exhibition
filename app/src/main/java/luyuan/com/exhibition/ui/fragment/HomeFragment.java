@@ -33,6 +33,7 @@ import luyuan.com.exhibition.ui.activity.CategoryTwoAvtivity;
 import luyuan.com.exhibition.ui.adapter.HomeAdapter;
 
 import static luyuan.com.exhibition.ui.activity.CategoryActivity.PARENT_ID;
+import static luyuan.com.exhibition.ui.activity.CategoryTwoAvtivity.PARENT_NAME;
 
 /**
  * @author: lujialei
@@ -96,6 +97,7 @@ public class HomeFragment extends Fragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(getContext(), CategoryTwoAvtivity.class);
                 intent.putExtra(PARENT_ID, list.get(position).getTrade_id());
+                intent.putExtra(PARENT_NAME, list.get(position).getName());
                 startActivity(intent);
             }
         });
