@@ -1,0 +1,48 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values-zh/strings.xml",
+                    "from": {
+                        "startLines": "7,5,6,2,4,3,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "308,228,270,55,174,119,358",
+                        "endColumns": "49,41,37,63,53,54,54",
+                        "endOffsets": "353,265,303,114,223,169,408"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,105,147,185,249,303,358",
+                        "endColumns": "49,41,37,63,53,54,54",
+                        "endOffsets": "100,142,180,244,298,353,408"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/incremental/mergeReleaseResources/merged.dir/values-zh/values-zh.xml",
+            "map": [
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values-zh/strings.xml",
+                    "from": {
+                        "startLines": "7,5,6,2,4,3,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "308,228,270,55,174,119,358",
+                        "endColumns": "49,41,37,63,53,54,54",
+                        "endOffsets": "353,265,303,114,223,169,408"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,105,147,185,249,303,358",
+                        "endColumns": "49,41,37,63,53,54,54",
+                        "endOffsets": "100,142,180,244,298,353,408"
+                    }
+                }
+            ]
+        }
+    ]
+}

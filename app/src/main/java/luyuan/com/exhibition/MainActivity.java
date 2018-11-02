@@ -11,10 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hyphenate.EMClientListener;
 import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.util.EMLog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,6 +86,39 @@ public class MainActivity extends BaseActivity {
     private void setBrocast() {
         IntentFilter callFilter = new IntentFilter(EMClient.getInstance().callManager().getIncomingCallBroadcastAction());
         registerReceiver(new CallReceiver(), callFilter);
+        EMClient.getInstance().chatManager().addMessageListener( new EMMessageListener() {
+            @Override
+            public void onMessageReceived(List<EMMessage> messages) {
+                for (EMMessage message : messages) {
+                    EaseUI.getInstance().getNotifier().vibrateAndPlayTone(message);
+                }
+            }
+
+            @Override
+            public void onCmdMessageReceived(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageRead(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageDelivered(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageRecalled(List<EMMessage> list) {
+
+            }
+
+            @Override
+            public void onMessageChanged(EMMessage emMessage, Object o) {
+
+            }
+        });
 
         EMClient.getInstance().callManager().addCallStateChangeListener(new EMCallStateChangeListener() {
             @Override

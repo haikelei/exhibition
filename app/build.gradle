@@ -12,10 +12,22 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        config {
+            storeFile file('../android.keystore')//签名文件路径
+            storePassword "xmkj2012"
+            keyAlias "xmkj"
+            keyPassword "xmkj2012"  //签名密码
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     //use legacy for android 6.0
@@ -49,4 +61,5 @@ dependencies {
     compile project(':libraryAdapter')
     implementation project(':easeui')
     compile project(path: ':libraryVideo')
+    implementation project(':keyboardchangelib')
 }

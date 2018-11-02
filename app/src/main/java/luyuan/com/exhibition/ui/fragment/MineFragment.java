@@ -43,7 +43,7 @@ import luyuan.com.exhibition.utils.SettingManager;
  */
 
 
-public class MineFragment extends Fragment {
+public class  MineFragment extends Fragment {
 
     Unbinder unbinder;
     @BindView(R.id.iv_avatar)

@@ -1,0 +1,154 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/values/values.xml",
+            "map": [
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/ids.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,102",
+                        "endColumns": "46,40",
+                        "endOffsets": "97,138"
+                    },
+                    "to": {
+                        "startLines": "4,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "175,221",
+                        "endColumns": "45,39",
+                        "endOffsets": "216,256"
+                    }
+                },
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/dimens.xml",
+                    "from": {
+                        "startLines": "2,1",
+                        "startColumns": "4,4",
+                        "startOffsets": "74,16",
+                        "endColumns": "61,57",
+                        "endOffsets": "131,69"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,117",
+                        "endColumns": "61,57",
+                        "endOffsets": "112,170"
+                    }
+                },
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "10,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "433,56",
+                        "endLines": "13,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "672,427"
+                    },
+                    "to": {
+                        "startLines": "13,17",
+                        "startColumns": "4,4",
+                        "startOffsets": "724,968",
+                        "endLines": "16,22",
+                        "endColumns": "12,12",
+                        "endOffsets": "963,1339"
+                    }
+                },
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "7,5,6,2,4,3,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "385,301,343,55,242,185,449",
+                        "endColumns": "63,41,41,129,58,56,68",
+                        "endOffsets": "444,338,380,180,296,237,513"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "261,325,367,409,539,598,655",
+                        "endColumns": "63,41,41,129,58,56,68",
+                        "endOffsets": "320,362,404,534,593,650,719"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/incremental/mergeReleaseResources/merged.dir/values/values.xml",
+            "map": [
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/ids.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,102",
+                        "endColumns": "46,40",
+                        "endOffsets": "97,138"
+                    },
+                    "to": {
+                        "startLines": "4,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "175,221",
+                        "endColumns": "45,39",
+                        "endOffsets": "216,256"
+                    }
+                },
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/dimens.xml",
+                    "from": {
+                        "startLines": "2,1",
+                        "startColumns": "4,4",
+                        "startOffsets": "74,16",
+                        "endColumns": "61,57",
+                        "endOffsets": "131,69"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,117",
+                        "endColumns": "61,57",
+                        "endOffsets": "112,170"
+                    }
+                },
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "10,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "433,56",
+                        "endLines": "13,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "672,427"
+                    },
+                    "to": {
+                        "startLines": "13,17",
+                        "startColumns": "4,4",
+                        "startOffsets": "724,968",
+                        "endLines": "16,22",
+                        "endColumns": "12,12",
+                        "endOffsets": "963,1339"
+                    }
+                },
+                {
+                    "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "7,5,6,2,4,3,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "385,301,343,55,242,185,449",
+                        "endColumns": "63,41,41,129,58,56,68",
+                        "endOffsets": "444,338,380,180,296,237,513"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "261,325,367,409,539,598,655",
+                        "endColumns": "63,41,41,129,58,56,68",
+                        "endOffsets": "320,362,404,534,593,650,719"
+                    }
+                }
+            ]
+        }
+    ]
+}

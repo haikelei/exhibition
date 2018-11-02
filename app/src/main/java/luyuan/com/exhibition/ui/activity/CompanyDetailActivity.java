@@ -2,18 +2,23 @@ package luyuan.com.exhibition.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hyphenate.easeui.EaseConstant;
+import com.yescpu.keyboardchangelib.KeyboardChangeListener;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 import com.zhouyou.http.callback.SimpleCallBack;
@@ -35,6 +40,7 @@ import luyuan.com.exhibition.ui.fragment.VideoFragment;
 import luyuan.com.exhibition.ui.interfaces.GlideImageLoader;
 import luyuan.com.exhibition.ui.widget.DefaultTopBar;
 import luyuan.com.exhibition.utils.Const;
+import luyuan.com.exhibition.utils.ScreenUtil;
 
 import static luyuan.com.exhibition.ui.activity.ChatActivity.CHAT_PASSWORD;
 import static luyuan.com.exhibition.ui.activity.ChatActivity.CHAT_STATUS;
@@ -54,7 +60,7 @@ public class CompanyDetailActivity extends BaseActivity {
     public static final String BOOTH_ID = "booth_id";
 
     @BindView(R.id.rl_bottom_container)
-    RelativeLayout rlBottomContainer;
+    LinearLayout rlBottomContainer;
     @BindView(R.id.iv_logo)
     ImageView ivLogo;
     @BindView(R.id.tv_des)
@@ -68,9 +74,15 @@ public class CompanyDetailActivity extends BaseActivity {
     @BindView(R.id.vp_video)
     ViewPager vp;
     VideoPagerAdapter mVideoPagerAdapter;
+    @BindView(R.id.rl2)
+    LinearLayout rl2;
+    @BindView(R.id.tv_nickname)
+    TextView tvNickname;
 
     private int boothId;
     private CompanyDetailBean.CompanyDetailsBean.AppChatBean chatBean;
+    private int screenHeight;
+    private int smallHeight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,6 +118,7 @@ public class CompanyDetailActivity extends BaseActivity {
     }
 
     private void loadData() {
+
         HttpManager.post(HttpManager.COMPANY_DETAIL)
                 .params("booth_id", String.valueOf(boothId))
                 .execute(new SimpleCallBack<CompanyDetailBean>() {
@@ -139,7 +152,7 @@ public class CompanyDetailActivity extends BaseActivity {
                             @Override
                             public void displayImage(Context context, Object path, ImageView imageView) {
                                 Glide.with(context)
-                                        .load(Const.IMG_PRE+path)
+                                        .load(Const.IMG_PRE + path)
                                         .diskCacheStrategy(DiskCacheStrategy.RESULT)
                                         .error(R.mipmap.no_image)
                                         .centerCrop()
@@ -164,7 +177,7 @@ public class CompanyDetailActivity extends BaseActivity {
                             VideoFragment videoFragment = VideoFragment.getInstance(list.get(i));
                             tmpList.add(videoFragment);
                         }
-                        mVideoPagerAdapter = new VideoPagerAdapter(getSupportFragmentManager(),tmpList);
+                        mVideoPagerAdapter = new VideoPagerAdapter(getSupportFragmentManager(), tmpList);
                         vp.setOffscreenPageLimit(0);
                         vp.setAdapter(mVideoPagerAdapter);
                     }
@@ -172,6 +185,7 @@ public class CompanyDetailActivity extends BaseActivity {
     }
 
     private void handleCompanyDetail(CompanyDetailBean companyDetailBean) {
+        tvNickname.setText(companyDetailBean.getCompany_details().getApp_chat().getHx_username());
         Glide.with(this)
                 .load(Const.IMG_PRE + companyDetailBean.getCompany_details().getHeadimgurl())
                 .into(ivLogo);
@@ -199,11 +213,48 @@ public class CompanyDetailActivity extends BaseActivity {
         args.putInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         args.putString(EaseConstant.EXTRA_USER_ID, companyDetailBean.getCompany_details().getApp_chat().getHx_username());
         chatFragment.setArguments(args);
-        getSupportFragmentManager().beginTransaction().add(R.id.rl_bottom_container, chatFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.rl_container, chatFragment).commit();
     }
 
+    public void changeHeight(int Height) {
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) rlBottomContainer.getLayoutParams();
+        params.height = Height;
+        rlBottomContainer.setLayoutParams(params);
+    }
 
     private void initView() {
 
+        rl2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect rect = new Rect();
+                rl2.getGlobalVisibleRect(rect);
+                Log.e("lujialei", "(" + rect.left + "," + rect.bottom + ")");
+                screenHeight = ScreenUtil.getScreenHeight(getBaseContext());
+                smallHeight = screenHeight - rect.bottom;
+                changeHeight(smallHeight);
+                rl2.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
+
+        new KeyboardChangeListener(this).setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
+            @Override
+            public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+                if (isShow) {
+                    tvNickname.setVisibility(View.VISIBLE);
+                    int height = screenHeight - keyboardHeight - 100;
+                    changeHeight(height);
+                } else {
+                    tvNickname.setVisibility(View.GONE);
+                    Rect rect = new Rect();
+                    rl2.getGlobalVisibleRect(rect);
+                    int height = screenHeight - rect.bottom;
+                    changeHeight(height);
+                }
+            }
+        });
+
     }
+
 }

@@ -1,6 +1,7 @@
 package luyuan.com.exhibition.utils;
 
 import android.content.Context;
+import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 
@@ -24,6 +25,12 @@ public class ScreenUtil {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public static int getScreenHeight(Context context){
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        return height;
     }
 
 }

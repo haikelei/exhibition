@@ -1,1 +1,1 @@
-include ':app', ':libraryAdapter', ':libraryNet', ':easeui', ':libraryVideo'
+include ':app', ':libraryAdapter', ':libraryNet', ':easeui', ':libraryVideo', ':keyboardchangelib'

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/anim/quit_fullscreen.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/anim/quit_fullscreen.xml"
+    },
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/anim/start_fullscreen.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/anim/start_fullscreen.xml"
+    }
+]

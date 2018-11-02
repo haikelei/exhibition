@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/layout/jz_layout_standard.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/layout/jz_layout_standard.xml"
+    },
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/layout/jz_layout_clarity.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/layout/jz_layout_clarity.xml"
+    },
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/layout/jz_layout_clarity_item.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/layout/jz_layout_clarity_item.xml"
+    },
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/layout/jz_dialog_progress.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/layout/jz_dialog_progress.xml"
+    },
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/layout/jz_dialog_volume.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/layout/jz_dialog_volume.xml"
+    },
+    {
+        "merged": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/build/intermediates/res/merged/release/layout/jz_dialog_brightness.xml",
+        "source": "/Users/gary/MainProject/androidStuiodProjects/exhibition/libraryVideo/src/main/res/layout/jz_dialog_brightness.xml"
+    }
+]
