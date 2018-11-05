@@ -19,6 +19,7 @@ public class CompanyProductBean {
     private String title;
     private String thumb;
     private String content;
+    public String summary;
 
     public int getProducts_id() {
         return products_id;

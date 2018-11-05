@@ -80,6 +80,8 @@
             ></activity>
         <activity android:name=".ui.activity.ServiceCompanyActivity"></activity>
         <activity android:name=".ui.activity.ServiceExhibitionActivity"></activity>
+        <activity android:name=".ui.activity.ProductDetail2Activity"/>
+        <activity android:name=".ui.activity.VideoListActivity"/>
         <activity android:name=".ui.activity.ModifyAddressActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden"
             ></activity>
@@ -91,6 +93,7 @@
             ></activity>
         <activity android:name=".ui.activity.CategoryActivity"></activity>
         <activity android:name=".ui.activity.CategoryTwoAvtivity"></activity>
+        <activity android:name=".ui.activity.ProductListActivity"/>
         <!---->
          <!--设置环信应用的AppKey -->
         <meta-data android:name="EASEMOB_APPKEY"  android:value="1158180523146355#zhaunhui" />

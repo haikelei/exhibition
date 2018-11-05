@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hyphenate.easeui.EaseConstant;
 import com.yescpu.keyboardchangelib.KeyboardChangeListener;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
@@ -78,6 +79,8 @@ public class CompanyDetailActivity extends BaseActivity {
     LinearLayout rl2;
     @BindView(R.id.tv_nickname)
     TextView tvNickname;
+    @BindView(R.id.ll_com_video)
+    LinearLayout llComVideo;
 
     private int boothId;
     private CompanyDetailBean.CompanyDetailsBean.AppChatBean chatBean;
@@ -91,7 +94,27 @@ public class CompanyDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
         boothId = getIntent().getIntExtra(BOOTH_ID, 0);
         initView();
+        initListener();
         loadData();
+    }
+
+    private void initListener() {
+        bannerProducts.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Intent intent = new Intent(getBaseContext(), ProductListActivity.class);
+                intent.putExtra(BOOTH_ID, boothId);
+                startActivity(intent);
+            }
+        });
+        llComVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(),VideoListActivity.class);
+                intent.putExtra(BOOTH_ID, boothId);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -19,6 +19,10 @@ public class ProductDetailBean {
     private String title;
     private String content;
     private List<ThumbsBean> thumbs;
+    public String thumb;
+    public String summary;
+    public String td_path;
+    public String vd_src;
 
     public String getTitle() {
         return title;
